@@ -38,6 +38,15 @@ section {
   flex-direction: column;
 }
 
+h2 {
+  font-family: 'Fasthand', cursive;
+  font-size: 35px
+}
+
+h3 {
+  font-family: 'Fasthand', cursive; 
+  font-size: 30px
+}
 .activity-box {
   height: 90%;
   margin-right: 0;
