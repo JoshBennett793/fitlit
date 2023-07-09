@@ -1,6 +1,16 @@
-//NOTE: Your DOM manipulation will occur in this file
+const userInfo = document.querySelector('.data-box')
 
-//Here are 2 example functions just to demonstrate one way you can export/import between the two js files. You'll want to delete these once you get your own code going.
+export function showUserData(user) {
+  console.log(user)
+  userInfo.innerHTML = '';
+  userInfo.innerHTML += `<p class="name">Name:${user.name} </p>
+  <p class="address"> Address:${user.address}</p>
+  <p class="email">Email:${user.email}</p>`
+
+}
+
+// showUserData(user)
+
 const exampleFunction1 = (person) => {
   console.log(`oh hi there ${person}`)
 }
@@ -10,7 +20,7 @@ const exampleFunction2 = (person) => {
 }
 
 
-export {
-  exampleFunction1,
-  exampleFunction2,
-}
+// export {
+//   exampleFunction1,
+//   exampleFunction2,
+// }
