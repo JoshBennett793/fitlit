@@ -1,24 +1,11 @@
-const userInfo = document.querySelector('.data-box')
+const userInfo = document.querySelector(".data-box");
 
 export function showUserData(user) {
-  userInfo.innerHTML += `<p class="name">Name: ${user.name} </p>
+  userInfo.innerHTML += `
+  <p class="name">Name: ${user.name} </p>
   <p class="address"> Address: ${user.address}</p>
-  <p class="email">Email: ${user.email}</p>`
-
-}
-
-// showUserData(user)
-
-const exampleFunction1 = (person) => {
-  console.log(`oh hi there ${person}`)
-}
-
-const exampleFunction2 = (person) => {
-  console.log(`bye now ${person}`)
+  <p class="email">Email: ${user.email}</p>
+  `;
 }
 
 
-export {
-  exampleFunction1,
-  exampleFunction2,
-}
