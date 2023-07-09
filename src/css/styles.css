@@ -37,17 +37,21 @@ section {
   flex-direction: column;
   box-shadow:
     0 0 15px #f09,
-    inset 0 0 10px #fff
+    inset 0 0 10px #fff;
+    color: #e9c4e0
 }
 
 h2 {
   font-family: 'Fasthand', cursive;
-  font-size: 35px
+  font-size: 50px;
+  margin: 0;
+  color: #e9c4e0
 }
 
 h3 {
-  font-family: 'Fasthand', cursive; 
-  font-size: 30px
+  font-family: 'Lobster', cursive; 
+  font-size: 30px;
+  margin-top: 0%
 }
 .activity-box {
   height: 90%;
@@ -86,6 +90,11 @@ h1 {
   height: 85%;
 }
 
+.data-box {
+  align-items: flex-start;
+  
+}
+
 .steps-circle {
   margin-top: 15%;
   height: 250px;
@@ -100,6 +109,14 @@ h1 {
 
 .friends-box {
   margin-top: 0;
+}
+
+p {
+  margin-left: 5%;
+  margin-top: 6%;
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  color: #e9c4e0
 }
 
 @keyframes pulsate {
