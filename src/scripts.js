@@ -1,33 +1,45 @@
 import './images/glass-of-water.png';
 import './images/zzzz.png';
 import './css/styles.css';
+
 import {
+  // User
   displayUsersName,
-  showWeeklySleepData,
-  showDailySleepData,
-  showDailySleepQuality,
-  showWeeklyWaterIntake,
   showUserData,
+
+  // Steps
   showUserStepsVsAvg,
-  showCurrentDayWaterIntake,
-  displayWeeklyStepData,
-  sleepAverage,
   displayTodaysStepData,
-  weeklyQualitySleep,
+  displayWeeklyStepData,
+
+  // Activity
   displayDistanceTraveled,
   displayTimeActive,
+
+  // Sleep
+  sleepAverage,
+  showDailySleepData, // merge with weekly fn
+  showDailySleepQuality,
+  showWeeklySleepData,
+  weeklyQualitySleep, // should be showWeeklySleepQuality
+
+  // Hydration
+  showCurrentDayWaterIntake,
+  showWeeklyWaterIntake,
 } from './domUpdates';
+
 import {
+  calculateDistanceTraveled,
+  getMinutesActive,
+  getDataByDate,
+  getAllTimeAverage,
+  getCurrentDate,
+
+  // User
   getRandomUser,
   getUserData,
-  getTodays,
-  calculateDistanceTraveled,
-  getActivityDataByDate,
-  getCurrentDate,
-  getAllTimeAverage,
-  getWeekly,
-  getMinutesActive,
 } from './model';
+
 import { getApiData } from './apiCalls';
 
 function initializeStore() {
@@ -86,27 +98,31 @@ function processUserData() {
   const userHydrationData = getUserData(
     'hydrationData',
     store.getKey('hydrationData'),
-    user.id
+    user.id,
   );
   const userSleepData = getUserData(
     'sleepData',
     store.getKey('sleepData'),
-    user.id
+    user.id,
   );
   const userActivityData = getUserData(
     'activityData',
     store.getKey('activityData'),
-    user.id
+    user.id,
   );
   const userWeeklyActivityData = userActivityData.slice(-7);
   const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
-  const dailyStepData = getTodays(
+  const dailyStepData = getDataByDate(
     'numSteps',
     userActivityData,
-    getCurrentDate(userActivityData)
+    getCurrentDate(userActivityData),
   );
   showCurrentDayWaterIntake(
-    getTodays('numOunces', userHydrationData, getCurrentDate(userHydrationData))
+    getDataByDate(
+      'numOunces',
+      userHydrationData,
+      getCurrentDate(userHydrationData),
+    ),
   );
   showUserData(store.getKey('user'));
   showUserStepsVsAvg(userSteps, avg);

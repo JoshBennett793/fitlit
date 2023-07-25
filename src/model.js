@@ -99,7 +99,7 @@ export function calculateDistanceTraveled(
 ) {
   // 1 mile === 5280 feet
   const mile = 5280;
-  activityData = getActivityDataByDate(activityData, userData.id, date);
+  activityData = getDataByDate('activityData', activityData, date);
   const distance = (userData.strideLength * activityData.numSteps) / mile;
   return parseFloat(distance.toFixed(2));
 }

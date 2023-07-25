@@ -2,7 +2,7 @@ import { WeeklyStepsVsGoal, stepProgressBar } from './charts';
 import {
   getWeekly,
   getCurrentDate,
-  getTodays,
+  getDataByDate,
   getAllTimeAverage,
 } from './model';
 const userInfo = document.querySelector('.data-box');
@@ -104,12 +104,12 @@ export function displayTodaysStepData(stepData, goal) {
 }
 
 export function showDailySleepData(sleep) {
-  const dailySleep = getTodays('hoursSlept', sleep, getCurrentDate(sleep));
+  const dailySleep = getDataByDate('hoursSlept', sleep, getCurrentDate(sleep));
   dailySleepBox.innerText = `${dailySleep}`;
 }
 
 export function showDailySleepQuality(sleep) {
-  const dailySleepQuality = getTodays(
+  const dailySleepQuality = getDataByDate(
     'sleepQuality',
     sleep,
     getCurrentDate(sleep),
@@ -134,7 +134,7 @@ export function weeklyQualitySleep(sleep) {
     <p class="weekly-ounces">${weeklyQuality[day]}</p>
     </article>`;
   });
-  const dailySleepQuality = getTodays(
+  const dailySleepQuality = getDataByDate(
     'sleepQuality',
     sleep,
     getCurrentDate(sleep),
