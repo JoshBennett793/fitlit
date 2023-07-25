@@ -29,10 +29,10 @@ import { getApiData } from './apiCalls';
 
 function initializeStore() {
   const store = {
-    users: 'https://fitlit-api.herokuapp.com/api/v1/users',
-    sleep: 'https://fitlit-api.herokuapp.com/api/v1/sleep',
-    hydration: 'https://fitlit-api.herokuapp.com/api/v1/hydration',
-    activity: 'https://fitlit-api.herokuapp.com/api/v1/activity',
+    users: 'http://localhost:3001/api/v1/users',
+    sleep: 'http://localhost:3001/api/v1/sleep',
+    hydration: 'http://localhost:3001/api/v1/hydration',
+    activity: '	http://localhost:3001/api/v1/activity',
   };
 
   return {
