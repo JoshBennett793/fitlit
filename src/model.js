@@ -1,4 +1,14 @@
-/* User Data */
+// Utility Functions
+
+function getRandomID(array) {
+  return Math.floor(Math.random() * array.length) + 1;
+}
+
+export function getCurrentDate(userData) {
+  return userData[userData.length - 1].date;
+}
+
+// User Data
 
 export function getUserData(dataType, dataset, id) {
   if (dataType === 'users') {
@@ -10,16 +20,6 @@ export function getUserData(dataType, dataset, id) {
 
 export function getRandomUser(users) {
   return getUserData('users', users, getRandomID(users));
-}
-
-/* Utility Functions */
-
-function getRandomID(array) {
-  return Math.floor(Math.random() * array.length) + 1;
-}
-
-export function getCurrentDate(userData) {
-  return userData[userData.length - 1].date;
 }
 
 export function getAllTimeAverage(key, userData) {
@@ -70,16 +70,10 @@ export function getWeekly(key, userData, date) {
   }, {});
 }
 
-/* Step Data */
+// Step Data
 
 export function getUserStepGoal(user) {
   return user.dailyStepGoal;
-}
-
-/* Activity Data */
-
-export function getMinutesActive(activityData) {
-  return activityData.minutesActive;
 }
 
 export function compareStepsWithGoal(stepData, goal) {
@@ -88,6 +82,12 @@ export function compareStepsWithGoal(stepData, goal) {
   }
 
   return false;
+}
+
+// Activity Data
+
+export function getMinutesActive(activityData) {
+  return activityData.minutesActive;
 }
 
 // Accepts a single user's data as userData param
@@ -102,8 +102,4 @@ export function calculateDistanceTraveled(
   activityData = getDataByDate('activityData', activityData, date);
   const distance = (userData.strideLength * activityData.numSteps) / mile;
   return parseFloat(distance.toFixed(2));
-}
-
-export function getListOfFriends(user) {
-  return;
 }

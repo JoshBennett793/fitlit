@@ -24,12 +24,14 @@ const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
 const stepBox = document.getElementById('current-steps');
 const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
 
+// User
+
 export function displayUsersName(user) {
   const firstName = user.name.split(' ')[0];
   usersName.innerText = `Hello, ${firstName}!`;
 }
 
-export function showUserData(user) {
+export function displayUserData(user) {
   const userInfo = {
     name: document.querySelector('.name'),
     address: document.querySelector('.address'),
@@ -41,50 +43,48 @@ export function showUserData(user) {
   userInfo.email.innerText = `Email: ${user.email}`;
 }
 
-export function showUserStepsVsAvg(userSteps, avg) {
+// Steps
+
+export function displayUserStepsVsAvg(userSteps, avg) {
   userStepsEl.innerText = `You: ${userSteps}`;
   avgStepsEl.innerText = `Avg: ${avg}`;
 }
 
-export function showCurrentDayWaterIntake(currentIntake) {
-  showWaterGlasses(currentIntake);
-  waterIntake.innerText = `Today : ${currentIntake} ounces`;
+export function displayTodaysStepData(stepData, goal) {
+  stepProgressBar(stepData, goal);
+  stepBox.innerText = `${stepData} Steps`;
 }
 
-function showWaterGlasses(ounces) {
-  let amount = Math.floor(ounces / 10);
-
-  if (amount > 9) {
-    amount = 9;
-  }
-
-  let html = '';
-
-  for (let i = 0; i < amount; i++) {
-    html += `<img class="water" src="./images/glass-of-water.png"/>`;
-  }
-
-  glassBox.innerHTML = `${html}`;
+export function displayWeeklyStepData(weekData, goal) {
+  WeeklyStepsVsGoal(weekData, goal);
 }
 
-export function showWeeklyWaterIntake(userHydrationData) {
-  const weeklyWater = getWeekly(
-    'numOunces',
-    userHydrationData,
-    getCurrentDate(userHydrationData),
-  );
-  const days = Object.keys(weeklyWater);
-  days.forEach(day => {
-    weeklyWaterIntake.innerHTML += `<article class="week-day" >
-                                    <p class="date" >${day.slice(5)}</p>
-                                    <p class="weekly-ounces">${
-                                      weeklyWater[day]
-                                    }oz</p>
-                                    </article>`;
-  });
+// Activity
+
+export function displayDistanceTraveled(distance) {
+  distanceTraveledEl.innerText = `${distance} mi`;
 }
 
-export function showWeeklySleepData(sleep) {
+export function displayTimeActive(time) {
+  timeActiveEl.innerText = `${time} mins`;
+}
+
+// Sleep
+
+export function sleepAverage(sleep) {
+  const sleepHours = getAllTimeAverage('hoursSlept', sleep);
+  const sleepQuality = getAllTimeAverage('sleepQuality', sleep);
+
+  allTimeSleepHours.innerText = `${sleepHours}`;
+  allTimeSleepQuality.innerText = `${sleepQuality}`;
+}
+
+export function displayDailySleepData(sleep) {
+  const dailySleep = getDataByDate('hoursSlept', sleep, getCurrentDate(sleep));
+  dailySleepBox.innerText = `${dailySleep}`;
+}
+
+export function displayWeeklySleepData(sleep) {
   const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
   const sleeps = Object.keys(weeklySleep);
   sleeps.forEach(day => {
@@ -95,20 +95,7 @@ export function showWeeklySleepData(sleep) {
   });
 }
 
-export function displayWeeklyStepData(weekData, goal) {
-  WeeklyStepsVsGoal(weekData, goal);
-}
-export function displayTodaysStepData(stepData, goal) {
-  stepProgressBar(stepData, goal);
-  stepBox.innerText = `${stepData} Steps`;
-}
-
-export function showDailySleepData(sleep) {
-  const dailySleep = getDataByDate('hoursSlept', sleep, getCurrentDate(sleep));
-  dailySleepBox.innerText = `${dailySleep}`;
-}
-
-export function showDailySleepQuality(sleep) {
+export function displayDailySleepQuality(sleep) {
   const dailySleepQuality = getDataByDate(
     'sleepQuality',
     sleep,
@@ -117,15 +104,7 @@ export function showDailySleepQuality(sleep) {
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
-export function sleepAverage(sleep) {
-  const sleepHours = getAllTimeAverage('hoursSlept', sleep);
-  const sleepQuality = getAllTimeAverage('sleepQuality', sleep);
-
-  allTimeSleepHours.innerText = `${sleepHours}`;
-  allTimeSleepQuality.innerText = `${sleepQuality}`;
-}
-
-export function weeklyQualitySleep(sleep) {
+export function displayWeeklySleepQuality(sleep) {
   const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
   const sleepQuality = Object.keys(weeklyQuality);
   sleepQuality.forEach(day => {
@@ -142,10 +121,42 @@ export function weeklyQualitySleep(sleep) {
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
-export function displayDistanceTraveled(distance) {
-  distanceTraveledEl.innerText = `${distance} mi`;
+// Hydration
+
+export function displayCurrentDayWaterIntake(currentIntake) {
+  displayWaterGlasses(currentIntake);
+  waterIntake.innerText = `Today : ${currentIntake} ounces`;
 }
 
-export function displayTimeActive(time) {
-  timeActiveEl.innerText = `${time} mins`;
+export function displayWeeklyWaterIntake(userHydrationData) {
+  const weeklyWater = getWeekly(
+    'numOunces',
+    userHydrationData,
+    getCurrentDate(userHydrationData),
+  );
+  const days = Object.keys(weeklyWater);
+  days.forEach(day => {
+    weeklyWaterIntake.innerHTML += `<article class="week-day" >
+                                    <p class="date" >${day.slice(5)}</p>
+                                    <p class="weekly-ounces">${
+                                      weeklyWater[day]
+                                    }oz</p>
+                                    </article>`;
+  });
+}
+
+function displayWaterGlasses(ounces) {
+  let amount = Math.floor(ounces / 10);
+
+  if (amount > 9) {
+    amount = 9;
+  }
+
+  let html = '';
+
+  for (let i = 0; i < amount; i++) {
+    html += `<img class="water" src="./images/glass-of-water.png"/>`;
+  }
+
+  glassBox.innerHTML = `${html}`;
 }
