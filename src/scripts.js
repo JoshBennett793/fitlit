@@ -1,5 +1,7 @@
 import './images/glass-of-water.png';
-import './images/zzzz.png';
+import './images/pink-moon.png';
+import './images/distance.svg';
+import './images/time.svg';
 import './css/styles.css';
 import {
   displayUsersName,

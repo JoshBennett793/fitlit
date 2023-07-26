@@ -47,25 +47,25 @@ export function showUserStepsVsAvg(userSteps, avg) {
 }
 
 export function showCurrentDayWaterIntake(currentIntake) {
-  showWaterGlasses(currentIntake);
-  waterIntake.innerText = `Today : ${currentIntake} ounces`;
+  // showWaterGlasses(currentIntake);
+  waterIntake.innerText = `${currentIntake} oz`;
 }
 
-function showWaterGlasses(ounces) {
-  let amount = Math.floor(ounces / 10);
+// function showWaterGlasses(ounces) {
+//   let amount = Math.floor(ounces / 10);
 
-  if (amount > 9) {
-    amount = 9;
-  }
+//   if (amount > 9) {
+//     amount = 9;
+//   }
 
-  let html = '';
+//   let html = '';
 
-  for (let i = 0; i < amount; i++) {
-    html += `<img class="water" src="./images/glass-of-water.png"/>`;
-  }
+//   for (let i = 0; i < amount; i++) {
+//     html += `<img class="water" src="./images/glass-of-water.png"/>`;
+//   }
 
-  glassBox.innerHTML = `${html}`;
-}
+//   glassBox.innerHTML = `${html}`;
+// }
 
 export function showWeeklyWaterIntake(userHydrationData) {
   const weeklyWater = getWeekly(
@@ -105,7 +105,7 @@ export function displayTodaysStepData(stepData, goal) {
 
 export function showDailySleepData(sleep) {
   const dailySleep = getTodays('hoursSlept', sleep, getCurrentDate(sleep));
-  dailySleepBox.innerText = `${dailySleep}`;
+  dailySleepBox.innerText = `${dailySleep} hrs`;
 }
 
 export function showDailySleepQuality(sleep) {
