@@ -28,7 +28,7 @@ import {
   getWeekly,
   getMinutesActive,
 } from './model';
-import { getApiData } from './apiCalls';
+import { getApiData, setApiData } from './apiCalls';
 
 function initializeStore() {
   const store = {
@@ -119,6 +119,7 @@ function processUserData() {
   showDailySleepData(userSleepData);
   showDailySleepQuality(userSleepData);
   weeklyQualitySleep(userSleepData);
+  setApiData('http://localhost:3001/api/v1/sleep')
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
