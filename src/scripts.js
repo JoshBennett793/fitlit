@@ -137,8 +137,8 @@ function processUserData() {
 
   // Display Step Data
   displayUserStepsVsAvg(userSteps, avg);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
   displayTodaysStepData(dailyStepData, user.dailyStepGoal);
+  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
 
   // Display Sleep Data
   sleepAverage(userSleepData);
