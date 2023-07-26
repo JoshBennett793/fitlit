@@ -5,10 +5,10 @@ import './css/styles.css';
 import {
   // User
   displayUsersName,
-  showUserData,
+  displayUserData,
 
   // Steps
-  showUserStepsVsAvg,
+  displayUserStepsVsAvg,
   displayTodaysStepData,
   displayWeeklyStepData,
 
@@ -18,26 +18,27 @@ import {
 
   // Sleep
   sleepAverage,
-  showDailySleepData, // merge with weekly fn
-  showDailySleepQuality,
-  showWeeklySleepData,
-  weeklyQualitySleep, // should be showWeeklySleepQuality
+  displayDailySleepData,
+  displayDailySleepQuality,
+  displayWeeklySleepData,
+  displayWeeklySleepQuality,
 
   // Hydration
-  showCurrentDayWaterIntake,
-  showWeeklyWaterIntake,
+  displayCurrentDayWaterIntake,
+  displayWeeklyWaterIntake,
 } from './domUpdates';
 
 import {
-  calculateDistanceTraveled,
-  getMinutesActive,
-  getDataByDate,
-  getAllTimeAverage,
-  getCurrentDate,
-
   // User
   getRandomUser,
   getUserData,
+  getDataByDate,
+  getAllTimeAverage,
+  // Activity
+  calculateDistanceTraveled,
+  getMinutesActive,
+  // Utility
+  getCurrentDate,
 } from './model';
 
 import { getApiData } from './apiCalls';
@@ -82,6 +83,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
+      store.setKey('user', getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -90,21 +92,13 @@ function initializeApp() {
 }
 
 function processUserData() {
-  const userData = store.getKey('userData');
-  store.setKey('user', getRandomUser(userData));
+  
+  // User Data
   const user = store.getKey('user');
-  const userSteps = user.dailyStepGoal;
+  const userData = store.getKey('userData');
   const avg = getAllTimeAverage('dailyStepGoal', userData);
-  const userHydrationData = getUserData(
-    'hydrationData',
-    store.getKey('hydrationData'),
-    user.id,
-  );
-  const userSleepData = getUserData(
-    'sleepData',
-    store.getKey('sleepData'),
-    user.id,
-  );
+
+  // Activity Data
   const userActivityData = getUserData(
     'activityData',
     store.getKey('activityData'),
@@ -112,29 +106,56 @@ function processUserData() {
   );
   const userWeeklyActivityData = userActivityData.slice(-7);
   const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
+  
+  // Step Data
+  const userSteps = user.dailyStepGoal;
   const dailyStepData = getDataByDate(
     'numSteps',
     userActivityData,
     getCurrentDate(userActivityData),
   );
-  showCurrentDayWaterIntake(
+
+  // Sleep Data
+  const userSleepData = getUserData(
+    'sleepData',
+    store.getKey('sleepData'),
+    user.id,
+  );
+
+  // Hydration Data
+  const userHydrationData = getUserData(
+    'hydrationData',
+    store.getKey('hydrationData'),
+    user.id,
+  );
+
+  // Display User Data
+  displayUserData(store.getKey('user'));
+  displayUsersName(store.getKey('user'));
+
+  // Display Step Data
+  displayUserStepsVsAvg(userSteps, avg);
+  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
+
+  // Display Sleep Data
+  sleepAverage(userSleepData);
+  displayDailySleepData(userSleepData);
+  displayWeeklySleepData(userSleepData);
+  displayDailySleepQuality(userSleepData);
+  displayWeeklySleepQuality(userSleepData);
+
+  // Display Hydration Data
+  displayCurrentDayWaterIntake(
     getDataByDate(
       'numOunces',
       userHydrationData,
       getCurrentDate(userHydrationData),
     ),
   );
-  showUserData(store.getKey('user'));
-  showUserStepsVsAvg(userSteps, avg);
-  displayUsersName(store.getKey('user'));
-  showWeeklyWaterIntake(userHydrationData);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
-  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  showWeeklySleepData(userSleepData);
-  sleepAverage(userSleepData);
-  showDailySleepData(userSleepData);
-  showDailySleepQuality(userSleepData);
-  weeklyQualitySleep(userSleepData);
+  displayWeeklyWaterIntake(userHydrationData);
+
+  // Display Activity Data
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
