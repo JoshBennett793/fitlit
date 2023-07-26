@@ -86,8 +86,8 @@ export function getMinutesActive(activityData) {
   return activityData.minutesActive;
 }
 
-export function compareStepsWithGoal(userData, activityData) {
-  if (userData.dailyStepGoal <= activityData.numSteps) {
+export function compareStepsWithGoal(stepData, goal) {
+  if (stepData <= goal) {
     return true;
   }
 
@@ -96,7 +96,7 @@ export function compareStepsWithGoal(userData, activityData) {
 
 // Accepts a single user's data as userData param
 // Accepts all activity data
-export function calculateDistanceTraveled(userData, date, activityData) {
+export function calculateDistanceTraveled(userData, date = '2023/07/01', activityData) {
   const mile = 5280;
   activityData = getActivityDataByDate(activityData, userData.id, date);
   const distance = (userData.strideLength * activityData.numSteps) / mile;

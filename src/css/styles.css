@@ -83,6 +83,7 @@ p {
 
 .activity-box {
   height: 90%;
+  padding: 5px;
   margin-right: 0;
 }
 
@@ -90,12 +91,10 @@ p {
   height: 230px;
   width: 90%;
   margin-top: 0px;
-  /* display: flex;
-  justify-content: center;
-  align-content: center; */
 }
 
 #steps-progress-bar {
+  margin-top: 5%;
   background-color: rgba(217, 217, 217, 0);
 }
 
@@ -104,13 +103,64 @@ p {
   margin-bottom: 90px;
 }
 
-.avg-comparison {
-  height: 15%;
+.widget-container {
+  height: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 15px;
+}
+
+.widget {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.user-vs-avg {
+  height: 200px;
+  width: auto;
+}
+
+.user-steps {
+  margin-bottom: auto;
+}
+
+.avg-steps {
+  margin-top: auto;
 }
 
 .weekly-steps {
   height: auto;
   width: auto;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.average {
+  background: url(/src/images/chart.svg) no-repeat;
+  height: 48px;
+  width: 48px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.distance {
+  background: url(/src/images/distance.svg) no-repeat;
+  height: 48px;
+  width: 48px;
+}
+
+.active {
+  background: url(/src/images/time.svg) no-repeat;
+  height: 48px;
+  width: 48px;
+}
+
+.distance-value,
+.active-value {
+  font-size: 25px;
 }
 
 /* -------------Water--------------*/
@@ -146,6 +196,7 @@ p {
   width: 40px;
   border-radius: 50%;
   margin-top: 0;
+  margin-bottom: 0px;
   background-color: #f09;
   display: flex;
   justify-content: center;

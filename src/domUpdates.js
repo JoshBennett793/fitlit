@@ -6,15 +6,17 @@ import {
   getAllTimeAverage,
 } from './model';
 const userInfo = document.querySelector('.data-box');
-const userStepsEl = document.querySelector('.user-steps .steps');
-const avgStepsEl = document.querySelector('.avg-steps .steps');
+const userStepsEl = document.querySelector('.user-steps');
+const avgStepsEl = document.querySelector('.avg-steps');
+const distanceTraveledEl = document.querySelector('.distance-value');
+const timeActiveEl = document.querySelector('.active-value');
 const waterIntake = document.querySelector('.water-intake');
 const usersName = document.querySelector('h2');
 const weeklyWaterIntake = document.querySelector('.weekly-water-box');
 const glassBox = document.querySelector('.glass-box');
 const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
 const allTimeSleepQuality = document.querySelector(
-  '.average-sleep-quality-box'
+  '.average-sleep-quality-box',
 );
 const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
@@ -40,8 +42,8 @@ export function showUserData(user) {
 }
 
 export function showUserStepsVsAvg(userSteps, avg) {
-  userStepsEl.innerText = `Your Step Goal: ${userSteps}`;
-  avgStepsEl.innerText = `Fitlit's Average Step Goal: ${avg}`;
+  userStepsEl.innerText = `You: ${userSteps}`;
+  avgStepsEl.innerText = `Avg: ${avg}`;
 }
 
 export function showCurrentDayWaterIntake(currentIntake) {
@@ -69,7 +71,7 @@ export function showWeeklyWaterIntake(userHydrationData) {
   const weeklyWater = getWeekly(
     'numOunces',
     userHydrationData,
-    getCurrentDate(userHydrationData)
+    getCurrentDate(userHydrationData),
   );
   const days = Object.keys(weeklyWater);
   days.forEach(day => {
@@ -110,7 +112,7 @@ export function showDailySleepQuality(sleep) {
   const dailySleepQuality = getTodays(
     'sleepQuality',
     sleep,
-    getCurrentDate(sleep)
+    getCurrentDate(sleep),
   );
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
@@ -132,4 +134,18 @@ export function weeklyQualitySleep(sleep) {
     <p class="weekly-ounces">${weeklyQuality[day]}</p>
     </article>`;
   });
+  const dailySleepQuality = getTodays(
+    'sleepQuality',
+    sleep,
+    getCurrentDate(sleep),
+  );
+  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
+}
+
+export function displayDistanceTraveled(distance) {
+  distanceTraveledEl.innerText = `${distance} mi`;
+}
+
+export function displayTimeActive(time) {
+  timeActiveEl.innerText = `${time} mins`;
 }

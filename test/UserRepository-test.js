@@ -293,8 +293,8 @@ describe('activityData', () => {
   it('should return a boolean false if the user has not passed their goal', () => {
     userData = getUserData('userData', sampleData.users, 3);
     activityData = getActivityDataByDate(sampleData.activity, 3, '2023/03/25');
-    const hasReachedGoal = compareStepsWithGoal(userData, activityData);
-
+    const hasReachedGoal = compareStepsWithGoal(userData, activityData.numSteps);
+    
     expect(hasReachedGoal).to.equal(false);
   });
 });

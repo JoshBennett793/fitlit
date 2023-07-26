@@ -14,6 +14,8 @@ import {
   sleepAverage,
   displayTodaysStepData,
   weeklyQualitySleep,
+  displayDistanceTraveled,
+  displayTimeActive,
 } from './domUpdates';
 import {
   getRandomUser,
@@ -24,6 +26,7 @@ import {
   getCurrentDate,
   getAllTimeAverage,
   getWeekly,
+  getMinutesActive,
 } from './model';
 import { getApiData, setApiData } from './apiCalls';
 
@@ -96,6 +99,7 @@ function processUserData() {
     user.id
   );
   const userWeeklyActivityData = userActivityData.slice(-7);
+  const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
   const dailyStepData = getTodays(
     'numSteps',
     userActivityData,
@@ -116,4 +120,8 @@ function processUserData() {
   showDailySleepQuality(userSleepData);
   weeklyQualitySleep(userSleepData);
   setApiData('http://localhost:3001/api/v1/sleep')
+  displayDistanceTraveled(
+    calculateDistanceTraveled(user, undefined, userActivityData),
+  );
+  displayTimeActive(getMinutesActive(mostRecentActivityData));
 }

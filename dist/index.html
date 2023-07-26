@@ -27,13 +27,23 @@
               <p id="current-steps"></p>
             </div>
           </div>
-          <section class="avg-comparison">
-            <article class="user-steps">
-              <p class="steps"></p>
-            </article>
-            <article class="avg-steps">
-              <p class="steps"></p>
-            </article>
+          <section class="widget-container">
+            <div role="section" class="widget steps-vs-avg-container">
+              <h3>Step Goal</h3>
+                <p class="user-steps"></p>
+                <p class="avg-steps"></p>
+              <div role="img" class="svg average" alt="line chart"></div>
+            </div>
+            <div role="section" class="widget">
+              <h3>Distance Traveled</h3>
+              <p class="distance-value"></p>
+              <div role="img" class="svg distance" alt="distance between two points"></div>
+            </div>
+            <div role="section" class="widget">
+              <h3>Time Active</h3>
+              <p class="active-value"></p>
+              <div role="img" class="svg active" alt="clock"></div>
+            </div>
           </section>
           <section class="weekly-steps">
             <canvas id="weekly-steps-bar-chart"></canvas>
@@ -49,9 +59,9 @@
           </section>
           <div class="weekly-water-box"></div>
         </section>
-
+        
         <section class="sleep-box">
-          <h3>Sleep</h3>
+          <h3>Sleep</h3> 
           <section class="hours-slept-data">
             <div>
               <h4>Hours Slept</h4>
