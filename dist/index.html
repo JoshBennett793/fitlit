@@ -19,106 +19,63 @@
   <body>
     <main>
       <div>
-        <section class="activity-box">
-          <h3>Steps</h3>
-          <div class="steps-circle">
-            <canvas id="steps-progress-bar" width="170"></canvas>
-            <div class="donut-inner">
-              <p id="current-steps"></p>
-            </div>
+        <div class="steps-circle">
+          <canvas id="steps-progress-bar" width="170"></canvas>
+          <div class="donut-inner">
+            <p id="current-steps"></p>
           </div>
-          <section class="widget-container">
-            <div role="section" class="widget steps-vs-avg-container">
-              <h3>Step Goal</h3>
-                <p class="user-steps"></p>
-                <p class="avg-steps"></p>
-              <div role="img" class="svg average" alt="line chart"></div>
+        </div>
+          <section class="widget-box">
+            <img class="widget-icon" src="./images/distance.svg" alt="Miles" />
+            <div class="widget-overlay">
+              <p class="distance-value widget-data"></p>
             </div>
-            <div role="section" class="widget">
-     
-              <div role="img" class="svg active" alt="clock"></div>
+          </section>
+          <section class="widget-box">
+            <img class="widget-icon" src="./images/time.svg" alt="Miles" />
+            <div class="widget-overlay">
+              <p class="active-value widget-data"></p>
             </div>
           </section>
           <section class="weekly-steps">
             <canvas id="weekly-steps-bar-chart"></canvas>
           </section>
-        </section>
-      </div>
-      <div>
-
-        <div class="weekly-water-box"></div>
-
+        </div>
+        <div>
           <section class="widget-box">
             <img class="widget-icon" src="./images/glass-of-water.png" alt="Water" />
             <div class="widget-overlay">
               <p class="water-intake widget-data"></p>
             </div>
           </section>
-
-        <section class="widget-box">
-          <img class="widget-icon icon-top" src="./images/pink-moon.png" alt="Sleep" />
-          <p class="daily-sleep-hours-box widget-data"></p>
-          <div class="widget-overlay overlay-bottom">
-            <button class="add-btn">+</button>
-          </div> 
-        </section>
-
-        <section class="widget-box">
-          <img class="widget-icon" src="./images/distance.svg" alt="Miles" />
-          <div class="widget-overlay">
-            <p class="distance-value widget-data"></p>
-          </div>
-        </section>
-
-        <section class="widget-box">
-          <img class="widget-icon" src="./images/time.svg" alt="Miles" />
-          <div class="widget-overlay">
-            <p class="active-value widget-data"></p>
-          </div>
-        </section>
-
-
-        <!-- <section class="sleep-box"> -->
-          <!-- <h3>Sleep</h3>  -->
-          <section class="hours-slept-data">
-            <div>
-              <!-- <h4>Hours Slept</h4> -->
-              <section class=" data-box" ></section>
-            </div>
-            <div class="sleep-quality-box">
-              <!-- <h4>Your Average</h4> -->
-              <section class="average-hours-sleep-box data-box"></section>
-            </div>
-          <!-- </section> -->
-          <!-- <h4>Hours Slept This Week</h4> -->
-
-          <div class="weekly-sleep-data-box"></div>
-          <section class="sleep-quality-data">
-            <div>
-              <!-- <h4>Quality of Sleep</h4> -->
-              <section class="daily-sleep-quality-box data-box"></section>
-            </div>
-            <div class="sleep-quality-box">
-              <!-- <h4>Your Average</h4> -->
-              <section class="average-sleep-quality-box data-box"></section>
-            </div>
+          <section class="widget-box">
+            <img class="widget-icon icon-top" src="./images/pink-moon.png" alt="Sleep" />
+            <p class="daily-sleep-hours-box widget-data"></p>
+            <div class="widget-overlay overlay-bottom">
+              <button class="add-btn">+</button>
+              <p class="daily-sleep-quality-box widget-data"></p>
+            </div> 
           </section>
-          <!-- <h4>Sleep Quality This Week</h4> -->
-          <div class="weekly-sleep-quality-box"></div>
-        <!-- </section>  -->
-
-      </div>
-      <div>
-        <h1>Breathe</h1>
-        <section class="user-box">
-          <h2>Hello Shego!</h2>
-          <section class="info-box">
-            <h3>Your Info</h3>
-            <article>
-              <p class="name"></p>
-              <p class="address"></p>
-              <p class="email"></p>
-            </article>
+          <section class="sleep-quality-data">
+            <p class="user-steps"></p>
+            <p class="avg-steps"></p>
+            <section class="average-hours-sleep-box data-box"></section>
+            <section class="average-sleep-quality-box data-box"></section>
+          </section>
+        </div>
+        <div>
+          <h1>Breathe</h1>
+          <section class="user-box">
+            <h2>Hello</h2>
+              <h3>Your Info</h3>
+              <article>
+                <p class="name"></p>
+                <p class="address"></p>
+                <p class="email"></p>
+              </article>
+            <div class="weekly-sleep-data-box"></div>
+            <div class="weekly-water-box"></div>
+            <div class="weekly-sleep-quality-box"></div>
           </section>
       </div>
     </main>
