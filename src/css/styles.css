@@ -217,6 +217,13 @@ p {
   font-size: 35px;
 }
 
+.steps-widget {
+  height: 250px;
+  width: 285px;
+  border-radius: 10%;
+  background-color: chocolate;
+}
+
 /* -------------Water--------------*/
 
 .water-box {
