@@ -3,41 +3,53 @@ import './images/pink-moon.png';
 import './images/distance.svg';
 import './images/time.svg';
 import './css/styles.css';
+
 import {
+  // User
   displayUsersName,
-  showWeeklySleepData,
-  showDailySleepData,
-  showDailySleepQuality,
-  showWeeklyWaterIntake,
-  showUserData,
-  showUserStepsVsAvg,
-  showCurrentDayWaterIntake,
-  displayWeeklyStepData,
-  sleepAverage,
+  displayUserData,
+
+  // Steps
+  displayUserStepsVsAvg,
   displayTodaysStepData,
-  weeklyQualitySleep,
+  displayWeeklyStepData,
+
+  // Activity
   displayDistanceTraveled,
   displayTimeActive,
+
+  // Sleep
+  sleepAverage,
+  displayDailySleepData,
+  displayDailySleepQuality,
+  displayWeeklySleepData,
+  displayWeeklySleepQuality,
+
+  // Hydration
+  displayCurrentDayWaterIntake,
+  displayWeeklyWaterIntake,
 } from './domUpdates';
+
 import {
+  // User
   getRandomUser,
   getUserData,
-  getTodays,
-  calculateDistanceTraveled,
-  getActivityDataByDate,
-  getCurrentDate,
+  getDataByDate,
   getAllTimeAverage,
-  getWeekly,
+  // Activity
+  calculateDistanceTraveled,
   getMinutesActive,
+  // Utility
+  getCurrentDate,
 } from './model';
-import { getApiData } from './apiCalls';
+import { getApiData, setApiData } from './apiCalls';
 
 function initializeStore() {
   const store = {
-    users: 'https://fitlit-api.herokuapp.com/api/v1/users',
-    sleep: 'https://fitlit-api.herokuapp.com/api/v1/sleep',
-    hydration: 'https://fitlit-api.herokuapp.com/api/v1/hydration',
-    activity: 'https://fitlit-api.herokuapp.com/api/v1/activity',
+    users: 'http://localhost:3001/api/v1/users',
+    sleep: 'http://localhost:3001/api/v1/sleep',
+    hydration: 'http://localhost:3001/api/v1/hydration',
+    activity: '	http://localhost:3001/api/v1/activity',
   };
 
   return {
@@ -72,6 +84,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
+      store.setKey('user', getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -80,47 +93,71 @@ function initializeApp() {
 }
 
 function processUserData() {
-  const userData = store.getKey('userData');
-  store.setKey('user', getRandomUser(userData));
+  // User Data
   const user = store.getKey('user');
-  const userSteps = user.dailyStepGoal;
+  const userData = store.getKey('userData');
   const avg = getAllTimeAverage('dailyStepGoal', userData);
-  const userHydrationData = getUserData(
-    'hydrationData',
-    store.getKey('hydrationData'),
-    user.id
-  );
-  const userSleepData = getUserData(
-    'sleepData',
-    store.getKey('sleepData'),
-    user.id
-  );
+
+  // Activity Data
   const userActivityData = getUserData(
     'activityData',
     store.getKey('activityData'),
-    user.id
+    user.id,
   );
   const userWeeklyActivityData = userActivityData.slice(-7);
   const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
-  const dailyStepData = getTodays(
+
+  // Step Data
+  const userSteps = user.dailyStepGoal;
+  const dailyStepData = getDataByDate(
     'numSteps',
     userActivityData,
-    getCurrentDate(userActivityData)
+    getCurrentDate(userActivityData),
   );
-  showCurrentDayWaterIntake(
-    getTodays('numOunces', userHydrationData, getCurrentDate(userHydrationData))
+
+  // Sleep Data
+  const userSleepData = getUserData(
+    'sleepData',
+    store.getKey('sleepData'),
+    user.id,
   );
-  showUserData(store.getKey('user'));
-  showUserStepsVsAvg(userSteps, avg);
+  setApiData('http://localhost:3001/api/v1/sleep');
+
+
+  // Hydration Data
+  const userHydrationData = getUserData(
+    'hydrationData',
+    store.getKey('hydrationData'),
+    user.id,
+  );
+
+  // Display User Data
+  displayUserData(store.getKey('user'));
   displayUsersName(store.getKey('user'));
-  showWeeklyWaterIntake(userHydrationData);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+
+  // Display Step Data
+  displayUserStepsVsAvg(userSteps, avg);
   displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  showWeeklySleepData(userSleepData);
+  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+
+  // Display Sleep Data
   sleepAverage(userSleepData);
-  showDailySleepData(userSleepData);
-  showDailySleepQuality(userSleepData);
-  weeklyQualitySleep(userSleepData);
+  displayDailySleepData(userSleepData);
+  displayWeeklySleepData(userSleepData);
+  displayDailySleepQuality(userSleepData);
+  displayWeeklySleepQuality(userSleepData);
+
+  // Display Hydration Data
+  displayCurrentDayWaterIntake(
+    getDataByDate(
+      'numOunces',
+      userHydrationData,
+      getCurrentDate(userHydrationData),
+    ),
+  );
+  displayWeeklyWaterIntake(userHydrationData);
+
+  // Display Activity Data
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );

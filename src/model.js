@@ -1,27 +1,25 @@
-/* User Data */
-
-export function getUserData(dataType, users, id) {
-  if (
-    dataType === 'hydrationData' ||
-    dataType === 'sleepData' ||
-    dataType === 'activityData'
-  ) {
-    return users.filter(data => data.userID === id);
-  } else {
-    return users.find(data => data.id === id);
-  }
-}
+// Utility Functions
 
 function getRandomID(array) {
   return Math.floor(Math.random() * array.length) + 1;
 }
 
-export function getRandomUser(users) {
-  return getUserData('users', users, getRandomID(users));
-}
-
 export function getCurrentDate(userData) {
   return userData[userData.length - 1].date;
+}
+
+// User Data
+
+export function getUserData(dataType, dataset, id) {
+  if (dataType === 'users') {
+    return dataset.find(data => data.id === id);
+  } else {
+    return dataset.filter(data => data.userID === id);
+  }
+}
+
+export function getRandomUser(users) {
+  return getUserData('users', users, getRandomID(users));
 }
 
 export function getAllTimeAverage(key, userData) {
@@ -39,11 +37,15 @@ export function getAllTimeAverage(key, userData) {
   }
 }
 
-export function getTodays(key, userData, date) {
+export function getDataByDate(key, userData, date) {
   userData = userData.find(data => data.date === date);
 
   if (!userData) {
     return 0;
+  }
+
+  if (key === 'activityData') {
+    return userData;
   }
 
   return userData[key];
@@ -68,22 +70,10 @@ export function getWeekly(key, userData, date) {
   }, {});
 }
 
-/* Step Data */
+// Step Data
 
 export function getUserStepGoal(user) {
   return user.dailyStepGoal;
-}
-
-/* Activity Data */
-
-export function getActivityDataByDate(activityData, id, date) {
-  return getUserData('activityData', activityData, id).find(
-    data => data.date === date
-  );
-}
-
-export function getMinutesActive(activityData) {
-  return activityData.minutesActive;
 }
 
 export function compareStepsWithGoal(stepData, goal) {
@@ -94,11 +84,22 @@ export function compareStepsWithGoal(stepData, goal) {
   return false;
 }
 
+// Activity Data
+
+export function getMinutesActive(activityData) {
+  return activityData.minutesActive;
+}
+
 // Accepts a single user's data as userData param
 // Accepts all activity data
-export function calculateDistanceTraveled(userData, date = '2023/07/01', activityData) {
+export function calculateDistanceTraveled(
+  userData,
+  date = '2023/07/01',
+  activityData,
+) {
+  // 1 mile === 5280 feet
   const mile = 5280;
-  activityData = getActivityDataByDate(activityData, userData.id, date);
+  activityData = getDataByDate('activityData', activityData, date);
   const distance = (userData.strideLength * activityData.numSteps) / mile;
   return parseFloat(distance.toFixed(2));
 }

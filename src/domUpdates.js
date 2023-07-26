@@ -2,7 +2,7 @@ import { WeeklyStepsVsGoal, stepProgressBar } from './charts';
 import {
   getWeekly,
   getCurrentDate,
-  getTodays,
+  getDataByDate,
   getAllTimeAverage,
 } from './model';
 const userInfo = document.querySelector('.data-box');
@@ -24,12 +24,14 @@ const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
 const stepBox = document.getElementById('current-steps');
 const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
 
+// User
+
 export function displayUsersName(user) {
   const firstName = user.name.split(' ')[0];
   usersName.innerText = `Hello, ${firstName}!`;
 }
 
-export function showUserData(user) {
+export function displayUserData(user) {
   const userInfo = {
     name: document.querySelector('.name'),
     address: document.querySelector('.address'),
@@ -41,33 +43,91 @@ export function showUserData(user) {
   userInfo.email.innerText = `Email: ${user.email}`;
 }
 
-export function showUserStepsVsAvg(userSteps, avg) {
+// Steps
+
+export function displayUserStepsVsAvg(userSteps, avg) {
   userStepsEl.innerText = `You: ${userSteps}`;
   avgStepsEl.innerText = `Avg: ${avg}`;
 }
 
-export function showCurrentDayWaterIntake(currentIntake) {
-  // showWaterGlasses(currentIntake);
-  waterIntake.innerText = `${currentIntake} oz`;
+export function displayTodaysStepData(stepData, goal) {
+  stepProgressBar(stepData, goal);
+  stepBox.innerText = `${stepData} Steps`;
 }
 
-// function showWaterGlasses(ounces) {
-//   let amount = Math.floor(ounces / 10);
+export function displayWeeklyStepData(weekData, goal) {
+  WeeklyStepsVsGoal(weekData, goal);
+}
 
-//   if (amount > 9) {
-//     amount = 9;
-//   }
+// Activity
 
-//   let html = '';
+export function displayDistanceTraveled(distance) {
+  distanceTraveledEl.innerText = `${distance} mi`;
+}
 
-//   for (let i = 0; i < amount; i++) {
-//     html += `<img class="water" src="./images/glass-of-water.png"/>`;
-//   }
+export function displayTimeActive(time) {
+  timeActiveEl.innerText = `${time} mins`;
+}
 
-//   glassBox.innerHTML = `${html}`;
-// }
+// Sleep
 
-export function showWeeklyWaterIntake(userHydrationData) {
+export function sleepAverage(sleep) {
+  const sleepHours = getAllTimeAverage('hoursSlept', sleep);
+  const sleepQuality = getAllTimeAverage('sleepQuality', sleep);
+
+  allTimeSleepHours.innerText = `${sleepHours}`;
+  allTimeSleepQuality.innerText = `${sleepQuality}`;
+}
+
+export function displayDailySleepData(sleep) {
+  const dailySleep = getDataByDate('hoursSlept', sleep, getCurrentDate(sleep));
+  dailySleepBox.innerText = `${dailySleep}`;
+}
+
+export function displayWeeklySleepData(sleep) {
+  const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
+  const sleeps = Object.keys(weeklySleep);
+  sleeps.forEach(day => {
+    weeklySleepBox.innerHTML += `<article class="week-day" >
+    <p class="date" >${day.slice(5)}</p>
+    <p class="weekly-ounces">${weeklySleep[day]}h</p>
+    </article>`;
+  });
+}
+
+export function displayDailySleepQuality(sleep) {
+  const dailySleepQuality = getDataByDate(
+    'sleepQuality',
+    sleep,
+    getCurrentDate(sleep),
+  );
+  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
+}
+
+export function displayWeeklySleepQuality(sleep) {
+  const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
+  const sleepQuality = Object.keys(weeklyQuality);
+  sleepQuality.forEach(day => {
+    weeklySleepQuality.innerHTML += `<article class="week-day" >
+    <p class="date" >${day.slice(5)}</p>
+    <p class="weekly-ounces">${weeklyQuality[day]}</p>
+    </article>`;
+  });
+  const dailySleepQuality = getDataByDate(
+    'sleepQuality',
+    sleep,
+    getCurrentDate(sleep),
+  );
+  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
+}
+
+// Hydration
+
+export function displayCurrentDayWaterIntake(currentIntake) {
+  waterIntake.innerText = `Today : ${currentIntake} ounces`;
+}
+
+export function displayWeeklyWaterIntake(userHydrationData) {
   const weeklyWater = getWeekly(
     'numOunces',
     userHydrationData,
@@ -82,70 +142,4 @@ export function showWeeklyWaterIntake(userHydrationData) {
                                     }oz</p>
                                     </article>`;
   });
-}
-
-export function showWeeklySleepData(sleep) {
-  const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
-  const sleeps = Object.keys(weeklySleep);
-  sleeps.forEach(day => {
-    weeklySleepBox.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklySleep[day]}h</p>
-    </article>`;
-  });
-}
-
-export function displayWeeklyStepData(weekData, goal) {
-  WeeklyStepsVsGoal(weekData, goal);
-}
-export function displayTodaysStepData(stepData, goal) {
-  stepProgressBar(stepData, goal);
-  stepBox.innerText = `${stepData} Steps`;
-}
-
-export function showDailySleepData(sleep) {
-  const dailySleep = getTodays('hoursSlept', sleep, getCurrentDate(sleep));
-  dailySleepBox.innerText = `${dailySleep} hrs`;
-}
-
-export function showDailySleepQuality(sleep) {
-  const dailySleepQuality = getTodays(
-    'sleepQuality',
-    sleep,
-    getCurrentDate(sleep),
-  );
-  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
-}
-
-export function sleepAverage(sleep) {
-  const sleepHours = getAllTimeAverage('hoursSlept', sleep);
-  const sleepQuality = getAllTimeAverage('sleepQuality', sleep);
-
-  allTimeSleepHours.innerText = `${sleepHours}`;
-  allTimeSleepQuality.innerText = `${sleepQuality}`;
-}
-
-export function weeklyQualitySleep(sleep) {
-  const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
-  const sleepQuality = Object.keys(weeklyQuality);
-  sleepQuality.forEach(day => {
-    weeklySleepQuality.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklyQuality[day]}</p>
-    </article>`;
-  });
-  const dailySleepQuality = getTodays(
-    'sleepQuality',
-    sleep,
-    getCurrentDate(sleep),
-  );
-  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
-}
-
-export function displayDistanceTraveled(distance) {
-  distanceTraveledEl.innerText = `${distance} mi`;
-}
-
-export function displayTimeActive(time) {
-  timeActiveEl.innerText = `${time} mins`;
 }
