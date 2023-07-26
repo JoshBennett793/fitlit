@@ -119,6 +119,8 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
+  setApiData('http://localhost:3001/api/v1/sleep');
+
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -154,7 +156,6 @@ function processUserData() {
   displayWeeklyWaterIntake(userHydrationData);
 
   // Display Activity Data
-  setApiData('http://localhost:3001/api/v1/sleep');
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
