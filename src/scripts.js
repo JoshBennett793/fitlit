@@ -40,15 +40,14 @@ import {
   // Utility
   getCurrentDate,
 } from './model';
-
-import { getApiData } from './apiCalls';
+import { getApiData, setApiData } from './apiCalls';
 
 function initializeStore() {
   const store = {
-    users: 'https://fitlit-api.herokuapp.com/api/v1/users',
-    sleep: 'https://fitlit-api.herokuapp.com/api/v1/sleep',
-    hydration: 'https://fitlit-api.herokuapp.com/api/v1/hydration',
-    activity: 'https://fitlit-api.herokuapp.com/api/v1/activity',
+    users: 'http://localhost:3001/api/v1/users',
+    sleep: 'http://localhost:3001/api/v1/sleep',
+    hydration: 'http://localhost:3001/api/v1/hydration',
+    activity: '	http://localhost:3001/api/v1/activity',
   };
 
   return {
@@ -92,7 +91,6 @@ function initializeApp() {
 }
 
 function processUserData() {
-  
   // User Data
   const user = store.getKey('user');
   const userData = store.getKey('userData');
@@ -106,7 +104,7 @@ function processUserData() {
   );
   const userWeeklyActivityData = userActivityData.slice(-7);
   const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
-  
+
   // Step Data
   const userSteps = user.dailyStepGoal;
   const dailyStepData = getDataByDate(
@@ -156,6 +154,7 @@ function processUserData() {
   displayWeeklyWaterIntake(userHydrationData);
 
   // Display Activity Data
+  setApiData('http://localhost:3001/api/v1/sleep');
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
