@@ -163,6 +163,46 @@ p {
   font-size: 25px;
 }
 
+/* -------------Widget--------------*/
+
+.widget-box {
+  height: 200px;
+  width: 250px;
+  border-radius: 10%;
+  background-color: #000000;
+  margin-top: 0;
+  margin-bottom: 0;
+  justify-content: start;
+  position: relative;
+}
+
+.widget-top {
+  height: 95px;
+  width: 245px;
+  background-color: #2c0428;
+  border-radius:  10% 10% 50% 50%;
+  margin : 5px;
+  display: flex;
+}
+
+.widget-icon {
+  height: 80px;
+  z-index: 1;
+  position: absolute;
+  right: 2px;
+  bottom:7%;
+}
+
+.add-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #c11867;
+  bottom: 20px;
+  left: 20px;
+  position: absolute;
+}
+
 /* -------------Water--------------*/
 
 .water-box {
@@ -172,14 +212,10 @@ p {
   justify-content: space-evenly;
 }
 
-.todays-water {
-  height: 35%;
-  margin-top: 0;
-  margin-bottom: 0;
-}
+
 
 .water-intake {
-  margin-bottom: 9px;
+  font-size: 35px;
 }
 
 .weekly-water-box {
