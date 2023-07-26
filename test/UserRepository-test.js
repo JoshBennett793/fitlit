@@ -8,10 +8,9 @@ import {
   getUserStepGoal,
   getAllTimeAverage,
   compareStepsWithGoal,
-  getActivityDataByDate,
   calculateDistanceTraveled,
   getMinutesActive,
-  getTodays,
+  getDataByDate,
   getWeekly,
 } from '../src/model';
 
@@ -74,7 +73,7 @@ describe('hydrationData', () => {
 
   it('should return a number for the amount of ounces a user has consumed on a specific day', () => {
     const userData = getUserData('hydrationData', hydrationData, 1);
-    const water = getTodays('numOunces', userData, '2023/03/26');
+    const water = getDataByDate('numOunces', userData, '2023/03/26');
 
     expect(water).to.be.a('number');
     expect(water).to.equal(21);
@@ -82,7 +81,7 @@ describe('hydrationData', () => {
 
   it('should return a 0 if no user data is found for that date', () => {
     const userData = getUserData('hydrationData', hydrationData, 1);
-    const water = getTodays('numOunces', userData, '2023/04/28');
+    const water = getDataByDate('numOunces', userData, '2023/04/28');
 
     expect(water).to.equal(0);
   });
@@ -168,14 +167,14 @@ describe('sleepData', () => {
 
   it('should return how many hours a user slept for a specific day', () => {
     const userData = getUserData('sleepData', sleep, 2);
-    const sleeps = getTodays('hoursSlept', userData, '2023/03/25');
+    const sleeps = getDataByDate('hoursSlept', userData, '2023/03/25');
 
     expect(sleeps).to.equal(8.4);
   });
 
   it('should return a users sleep quality for a specific day', () => {
     const userData = getUserData('sleepData', sleep, 2);
-    const sleeps = getTodays('sleepQuality', userData, '2023/03/25');
+    const sleeps = getDataByDate('sleepQuality', userData, '2023/03/25');
 
     expect(sleeps).to.equal(3.5);
   });
@@ -240,15 +239,44 @@ describe('sleepData', () => {
 });
 
 describe('activityData', () => {
-  let userData, activityData;
+  let userData1,
+    userData2,
+    userData3,
+    userActivityData1,
+    userActivityData2,
+    userActivityData3,
+    activityDataByDate1,
+    activityDataByDate2,
+    activityDataByDate3;
 
   beforeEach('init data', () => {
-    userData = getUserData('userData', sampleData.users, 1);
-    activityData = getActivityDataByDate(sampleData.activity, 1, '2023/03/25');
+    userData1 = getUserData('users', sampleData.users, 1);
+    userActivityData1 = getUserData('activityData', sampleData.activity, 1);
+    activityDataByDate1 = getDataByDate(
+      'activityData',
+      userActivityData1,
+      '2023/03/25',
+    );
+
+    userData2 = getUserData('users', sampleData.users, 2);
+    userActivityData2 = getUserData('activityData', sampleData.activity, 2);
+    activityDataByDate2 = getDataByDate(
+      'activityData',
+      userActivityData2,
+      '2023/03/25',
+    );
+
+    userData3 = getUserData('users', sampleData.users, 3);
+    userActivityData3 = getUserData('activityData', sampleData.activity, 3);
+    activityDataByDate3 = getDataByDate(
+      'activityData',
+      userActivityData3,
+      '2023/03/25',
+    );
   });
 
   it("should return a user's activity data by date", () => {
-    expect(activityData).to.deep.equal({
+    expect(activityDataByDate1).to.deep.equal({
       userID: 1,
       date: '2023/03/25',
       numSteps: 14264,
@@ -259,42 +287,37 @@ describe('activityData', () => {
 
   it('should calculate distance traveled', () => {
     const distanceTraveled = calculateDistanceTraveled(
-      userData,
+      userData1,
       '2023/03/25',
-      sampleData.activity
+      sampleData.activity,
     );
     expect(distanceTraveled).to.equal(10.81);
   });
 
   it('should return the minutes a user was active on a specific date', () => {
-    const minutes = getMinutesActive(activityData);
+    const minutes = getMinutesActive(activityDataByDate1);
 
     expect(minutes).to.equal(111);
   });
 
   it('should return a boolean true if the user has just met their goal', () => {
-    userData = getUserData('userData', sampleData.users, 2);
-    activityData = getActivityDataByDate(sampleData.activity, 2, '2023/03/25');
-
-    const hasReachedGoal = compareStepsWithGoal(userData, activityData);
+    const hasReachedGoal = compareStepsWithGoal(userData2, activityDataByDate2);
 
     expect(hasReachedGoal).to.equal(true);
   });
 
   it('should return a boolean true if the user has passed their goal', () => {
-    userData = getUserData('userData', sampleData.users, 2);
-    activityData = getActivityDataByDate(sampleData.activity, 2, '2023/03/25');
-
-    const hasReachedGoal = compareStepsWithGoal(userData, activityData);
+    const hasReachedGoal = compareStepsWithGoal(userData2, activityDataByDate2);
 
     expect(hasReachedGoal).to.equal(true);
   });
 
   it('should return a boolean false if the user has not passed their goal', () => {
-    userData = getUserData('userData', sampleData.users, 3);
-    activityData = getActivityDataByDate(sampleData.activity, 3, '2023/03/25');
-    const hasReachedGoal = compareStepsWithGoal(userData, activityData.numSteps);
-    
+    const hasReachedGoal = compareStepsWithGoal(
+      userData3,
+      activityDataByDate3.numSteps,
+    );
+
     expect(hasReachedGoal).to.equal(false);
   });
 });
