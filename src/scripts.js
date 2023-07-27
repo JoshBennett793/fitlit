@@ -24,6 +24,7 @@ import {
   displayDailySleepQuality,
   displayWeeklySleepData,
   displayWeeklySleepQuality,
+  toggleAddSleepModal,
 
   // Hydration
   displayCurrentDayWaterIntake,
@@ -43,6 +44,10 @@ import {
   getCurrentDate,
 } from './model';
 import { getApiData, setApiData } from './apiCalls';
+
+// Query Selectors
+const addSleepDataButton = document.querySelector('.add-btn');
+const exitModalButton = document.querySelector('.exit-modal');
 
 function initializeStore() {
   const store = {
@@ -121,7 +126,7 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  setApiData('http://localhost:3001/api/v1/sleep');
+  // setApiData('http://localhost:3001/api/v1/sleep');
 
 
   // Hydration Data
@@ -163,3 +168,8 @@ function processUserData() {
   );
   displayTimeActive(getMinutesActive(mostRecentActivityData));
 }
+
+// Event Listeners
+
+addSleepDataButton.onclick = toggleAddSleepModal;
+exitModalButton.onclick = toggleAddSleepModal;
