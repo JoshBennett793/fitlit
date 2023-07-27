@@ -6,15 +6,16 @@ import {
   getAllTimeAverage,
 } from './model';
 const userInfo = document.querySelector('.data-box');
+const usersName = document.querySelector('h2');
 const userStepsEl = document.querySelector('.user-steps');
 const avgStepsEl = document.querySelector('.avg-steps');
 const distanceTraveledEl = document.querySelector('.distance-value');
 const timeActiveEl = document.querySelector('.active-value');
 const waterIntake = document.querySelector('.water-intake');
-const usersName = document.querySelector('h2');
 const weeklyWaterIntake = document.querySelector('.weekly-water-box');
 const glassBox = document.querySelector('.glass-box');
-// const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
+const stepBox = document.getElementById('current-steps');
+const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
 const allTimeSleepQuality = document.querySelector(
   '.average-sleep-quality-box',
 );
@@ -122,4 +123,8 @@ export function displayWeeklyWaterIntake(userHydrationData) {
                                     }oz</p>
                                     </article>`;
   });
+}
+
+export function toggleAddSleepModal() {
+  sleepModal.classList.toggle('visible');
 }
