@@ -47,6 +47,7 @@ import { getApiData, setApiData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
+const exitModalButton = document.querySelector('.exit-modal');
 
 function initializeStore() {
   const store = {
@@ -171,3 +172,4 @@ function processUserData() {
 // Event Listeners
 
 addSleepDataButton.onclick = toggleAddSleepModal;
+exitModalButton.onclick = toggleAddSleepModal;
