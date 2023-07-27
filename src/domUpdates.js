@@ -1,4 +1,4 @@
-import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart} from './charts';
+import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart, weeklySleepHoursChart} from './charts';
 import {
   getWeekly,
   getCurrentDate,
@@ -14,7 +14,7 @@ const waterIntake = document.querySelector('.water-intake');
 const usersName = document.querySelector('h2');
 const weeklyWaterIntake = document.querySelector('.weekly-water-box');
 const glassBox = document.querySelector('.glass-box');
-const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
+// const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
 const allTimeSleepQuality = document.querySelector(
   '.average-sleep-quality-box',
 );
@@ -22,7 +22,7 @@ const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
 const stepBox = document.getElementById('current-steps');
-const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
+// const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
 
 // User
 
@@ -85,14 +85,7 @@ export function displayDailySleepData(sleep) {
 }
 
 export function displayWeeklySleepData(sleep) {
-  const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
-  const sleeps = Object.keys(weeklySleep);
-  sleeps.forEach(day => {
-    weeklySleepBox.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklySleep[day]}h</p>
-    </article>`;
-  });
+  weeklySleepHoursChart(sleep)
 }
 
 export function displayDailySleepQuality(sleep) {
@@ -106,12 +99,6 @@ export function displayDailySleepQuality(sleep) {
 
 export function displayWeeklySleepQuality(sleep) {
   weeklySleepQualityChart(sleep)
-  const dailySleepQuality = getDataByDate(
-    'sleepQuality',
-    sleep,
-    getCurrentDate(sleep),
-  );
-  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
 // Hydration
