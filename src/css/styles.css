@@ -325,7 +325,7 @@ p {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
-  height: 80vh;
+  height: 50vh;
   width: 30rem;
   padding: 20px;
 
@@ -338,6 +338,37 @@ p {
 
   display: flex;
   justify-content: center;
+}
+
+.modal-header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-header h2 {
+  margin: 0 auto;
+}
+
+.sleep-modal .exit-modal {
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+
+  font-size: 1.3rem;
+  color: #e9c4e0;
+  background-color: #310c2d;
+
+  margin-right: 10px;
+  margin-bottom: 50px;
+
+  cursor: pointer;
+}
+
+.sleep-modal .exit-modal:hover {
+  background-color: #7f1c75;
 }
 
 .modal-form-container {
