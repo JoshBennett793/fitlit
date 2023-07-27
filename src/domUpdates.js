@@ -6,14 +6,15 @@ import {
   getAllTimeAverage,
 } from './model';
 const userInfo = document.querySelector('.data-box');
+const usersName = document.querySelector('h2');
 const userStepsEl = document.querySelector('.user-steps');
 const avgStepsEl = document.querySelector('.avg-steps');
 const distanceTraveledEl = document.querySelector('.distance-value');
 const timeActiveEl = document.querySelector('.active-value');
 const waterIntake = document.querySelector('.water-intake');
-const usersName = document.querySelector('h2');
 const weeklyWaterIntake = document.querySelector('.weekly-water-box');
 const glassBox = document.querySelector('.glass-box');
+const stepBox = document.getElementById('current-steps');
 const weeklySleepBox = document.querySelector('.weekly-sleep-data-box');
 const allTimeSleepQuality = document.querySelector(
   '.average-sleep-quality-box',
@@ -21,8 +22,8 @@ const allTimeSleepQuality = document.querySelector(
 const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
-const stepBox = document.getElementById('current-steps');
 const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
+const sleepModal = document.querySelector('.add-sleep-data-modal');
 
 // User
 
@@ -145,5 +146,5 @@ export function displayWeeklyWaterIntake(userHydrationData) {
 }
 
 export function toggleAddSleepModal() {
-  // grab modal element and toggle visibility 
+  sleepModal.classList.toggle('visible');
 }
