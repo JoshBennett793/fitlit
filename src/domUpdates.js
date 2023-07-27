@@ -1,4 +1,4 @@
-import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart, weeklySleepHoursChart} from './charts';
+import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart, weeklySleepHoursChart, weeklyWaterIntakeChart} from './charts';
 import {
   getWeekly,
   getCurrentDate,
@@ -22,8 +22,7 @@ const allTimeSleepQuality = document.querySelector(
 const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
-const stepBox = document.getElementById('current-steps');
-// const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
+
 
 // User
 
@@ -108,21 +107,8 @@ export function displayCurrentDayWaterIntake(currentIntake) {
   waterIntake.innerText = `Today : ${currentIntake} ounces`;
 }
 
-export function displayWeeklyWaterIntake(userHydrationData) {
-  const weeklyWater = getWeekly(
-    'numOunces',
-    userHydrationData,
-    getCurrentDate(userHydrationData),
-  );
-  const days = Object.keys(weeklyWater);
-  days.forEach(day => {
-    weeklyWaterIntake.innerHTML += `<article class="week-day" >
-                                    <p class="date" >${day.slice(5)}</p>
-                                    <p class="weekly-ounces">${
-                                      weeklyWater[day]
-                                    }oz</p>
-                                    </article>`;
-  });
+export function displayWeeklyWaterIntake(userWeeklyHydrationData) {
+  weeklyWaterIntakeChart(userWeeklyHydrationData)
 }
 
 export function toggleAddSleepModal() {
