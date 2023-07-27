@@ -180,6 +180,7 @@ exitModalButton.addEventListener('click', () => {
 })
 
 saveSleepDataButton.addEventListener('click', (e) => {
-
+  document.querySelector('form').checkValidity();
+  document.querySelector('form').reportValidity();
   e.preventDefault();
 })
