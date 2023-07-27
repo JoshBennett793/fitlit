@@ -121,7 +121,8 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  setApiData('http://localhost:3001/api/v1/sleep');
+  const userWeeklySleepData = userSleepData.slice(-7);
+  // setApiData('http://localhost:3001/api/v1/sleep');
 
 
   // Hydration Data
@@ -143,9 +144,10 @@ function processUserData() {
   // Display Sleep Data
   sleepAverage(userSleepData);
   displayDailySleepData(userSleepData);
-  displayWeeklySleepData(userSleepData);
-  displayDailySleepQuality(userSleepData);
+  displayWeeklySleepData(userWeeklySleepData);
+  displayDailySleepQuality(userWeeklySleepData);
   displayWeeklySleepQuality(userSleepData);
+  
 
   // Display Hydration Data
   displayCurrentDayWaterIntake(
