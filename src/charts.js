@@ -40,7 +40,26 @@ export function weeklySleepQualityChart(weekData) {
   })
 }
 
-export function stepProgressBar(stepData, goal) {
+export function weeklySleepHoursChart(weekData) {
+  const dates = weekData.map(row => row.date.slice(5)).slice(-7)
+  console.log(dates)
+  new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: 'Hours Slept',
+          data: weekData.map(row => row.hoursSlept).slice(-7),
+          backgroundColor: ['rgb(255,0,152)']
+        }
+      ]
+    }
+  })
+}
+
+
+  export function stepProgressBar(stepData, goal) {
   let goalRemainder = 0;
 
   if (compareStepsWithGoal(stepData, goal)) {
