@@ -1,4 +1,4 @@
-import { WeeklyStepsVsGoal, stepProgressBar } from './charts';
+import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart} from './charts';
 import {
   getWeekly,
   getCurrentDate,
@@ -98,21 +98,14 @@ export function displayWeeklySleepData(sleep) {
 export function displayDailySleepQuality(sleep) {
   const dailySleepQuality = getDataByDate(
     'sleepQuality',
-    sleep,
+     sleep,
     getCurrentDate(sleep),
   );
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
 export function displayWeeklySleepQuality(sleep) {
-  const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
-  const sleepQuality = Object.keys(weeklyQuality);
-  sleepQuality.forEach(day => {
-    weeklySleepQuality.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklyQuality[day]}</p>
-    </article>`;
-  });
+  weeklySleepQualityChart(sleep)
   const dailySleepQuality = getDataByDate(
     'sleepQuality',
     sleep,
