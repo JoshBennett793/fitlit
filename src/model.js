@@ -103,3 +103,30 @@ export function calculateDistanceTraveled(
   const distance = (userData.strideLength * activityData.numSteps) / mile;
   return parseFloat(distance.toFixed(2));
 }
+
+// Sleep Data
+
+export function calculateTotalTimeSlept(...times) {
+  const [start, end] = times;
+  const [hour1, min1] = start.split(':');
+  const [hour2, min2] = end.split(':');
+
+  let diffHour = parseInt(hour2) - parseInt(hour1);
+  let diffMin = parseInt(min2) - parseInt(min1);
+  
+  // account for a negative hour difference
+  if (diffHour < 0) {
+    diffHour += 24;
+  }
+  
+  // account for negative minute difference
+  if (diffMin < 0) {
+    diffMin += 60;
+    diffHour--;
+  } else if (diffMin > 60) {
+    diffMin -= 60;
+    diffHour++;
+  }
+
+  return (diffHour + (diffMin / 60)).toFixed(1);
+}

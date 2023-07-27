@@ -42,6 +42,8 @@ import {
   getMinutesActive,
   // Utility
   getCurrentDate,
+  calculateTotalTimeSlept,
+  sendSleepDataToAPI,
 } from './model';
 import { getApiData, setApiData } from './apiCalls';
 
@@ -128,7 +130,6 @@ function processUserData() {
   );
   // setApiData('http://localhost:3001/api/v1/sleep');
 
-
   // Hydration Data
   const userHydrationData = getUserData(
     'hydrationData',
@@ -171,5 +172,26 @@ function processUserData() {
 
 // Event Listeners
 
+const sleepModalSaveButton = document.querySelector('.modal-save-button');
+const sleepModalForm = document.querySelector('#sleep-modal-form');
+
 addSleepDataButton.onclick = toggleAddSleepModal;
 exitModalButton.onclick = toggleAddSleepModal;
+sleepModalSaveButton.onclick = e => {
+  e.preventDefault();
+
+  const formData = new FormData(sleepModalForm);
+  const values = [...formData.entries()];
+  const formattedValues = values.reduce((acc, value) => {
+    acc[value[0]] = value[1];
+    return acc;
+  }, {});
+
+  const totalTimeSlept = calculateTotalTimeSlept(
+    formattedValues['begin-time'],
+    formattedValues['end-time'],
+  );
+
+  sleepModalForm.reset();
+  toggleAddSleepModal();
+};
