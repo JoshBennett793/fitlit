@@ -136,6 +136,7 @@ function processUserData() {
     store.getKey('hydrationData'),
     user.id,
   );
+  const userWeeklyHydrationData = userHydrationData.slice(-7)
 
   // Display User Data
   displayUserData(store.getKey('user'));
@@ -162,7 +163,7 @@ function processUserData() {
       getCurrentDate(userHydrationData),
     ),
   );
-  displayWeeklyWaterIntake(userHydrationData);
+  displayWeeklyWaterIntake(userWeeklyHydrationData);
 
   // Display Activity Data
   displayDistanceTraveled(
