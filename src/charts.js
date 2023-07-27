@@ -23,6 +23,23 @@ export function WeeklyStepsVsGoal(weekData, goal) {
   });
 }
 
+export function weeklySleepQualityChart(weekData) {
+  const dates = weekData.map(row => row.date.slice(5)).slice(-7)
+  new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: 'Sleep Quality',
+          data: weekData.map(row => row.sleepQuality).slice(-7),
+          backgroundColor: ['rgb(255,0,152)']
+        }
+      ]
+    }
+  })
+}
+
 export function stepProgressBar(stepData, goal) {
   let goalRemainder = 0;
 
