@@ -42,7 +42,6 @@ export function weeklySleepQualityChart(weekData) {
 
 export function weeklySleepHoursChart(weekData) {
   const dates = weekData.map(row => row.date.slice(5)).slice(-7)
-  console.log(dates)
   new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
     type: 'bar',
     data: {
@@ -58,6 +57,22 @@ export function weeklySleepHoursChart(weekData) {
   })
 }
 
+export function weeklyWaterIntakeChart(weekData) {
+  const dates = weekData.map(row => row.date.slice(5)).slice(-7)
+  new Chart(document.getElementById('weekly-water-intake-bar-chart'), {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [
+        {
+          label: 'Weekly Water',
+          data: weekData.map(row => row.numOunces).slice(-7),
+          backgroundColor: ['rgb(255,0,152)']
+        }
+      ]
+    }
+  })
+}
 
   export function stepProgressBar(stepData, goal) {
   let goalRemainder = 0;
