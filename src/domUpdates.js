@@ -143,3 +143,7 @@ export function displayWeeklyWaterIntake(userHydrationData) {
                                     </article>`;
   });
 }
+
+export function toggleAddSleepModal() {
+  // grab modal element and toggle visibility 
+}

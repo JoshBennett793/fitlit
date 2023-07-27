@@ -25,60 +25,90 @@
             <p id="current-steps"></p>
           </div>
         </div>
-          <section class="widget-box">
-            <img class="widget-icon" src="./images/distance.svg" alt="Miles" />
-            <div class="widget-overlay">
-              <p class="distance-value widget-data"></p>
-            </div>
-          </section>
-          <section class="widget-box">
-            <img class="widget-icon" src="./images/time.svg" alt="Miles" />
-            <div class="widget-overlay">
-              <p class="active-value widget-data"></p>
-            </div>
-          </section>
-          <section class="weekly-steps">
-            <canvas id="weekly-steps-bar-chart"></canvas>
-          </section>
-        </div>
-        <div>
-          <section class="widget-box">
-            <img class="widget-icon" src="./images/glass-of-water.png" alt="Water" />
-            <div class="widget-overlay">
-              <p class="water-intake widget-data"></p>
-            </div>
-          </section>
-          <section class="widget-box">
-            <img class="widget-icon icon-top" src="./images/pink-moon.png" alt="Sleep" />
-            <p class="daily-sleep-hours-box widget-data"></p>
-            <div class="widget-overlay overlay-bottom">
-              <button class="add-btn">+</button>
-              <p class="daily-sleep-quality-box widget-data"></p>
-            </div> 
-          </section>
-          <section class="sleep-quality-data">
-            <p class="user-steps"></p>
-            <p class="avg-steps"></p>
-            <section class="average-hours-sleep-box data-box"></section>
-            <section class="average-sleep-quality-box data-box"></section>
-          </section>
-        </div>
-        <div>
-          <h1>Breathe</h1>
-          <section class="user-box">
-            <h2>Hello</h2>
-              <h3>Your Info</h3>
-              <article>
-                <p class="name"></p>
-                <p class="address"></p>
-                <p class="email"></p>
-              </article>
-            <div class="weekly-sleep-data-box"></div>
-            <div class="weekly-water-box"></div>
-            <div class="weekly-sleep-quality-box"></div>
-          </section>
+        <section class="widget-box">
+          <img class="widget-icon" src="./images/distance.svg" alt="Miles" />
+          <div class="widget-overlay">
+            <p class="distance-value widget-data"></p>
+          </div>
+        </section>
+        <section class="widget-box">
+          <img class="widget-icon" src="./images/time.svg" alt="Miles" />
+          <div class="widget-overlay">
+            <p class="active-value widget-data"></p>
+          </div>
+        </section>
+        <section class="weekly-steps">
+          <canvas id="weekly-steps-bar-chart"></canvas>
+        </section>
+      </div>
+      <div>
+        <section class="widget-box">
+          <img
+            class="widget-icon"
+            src="./images/glass-of-water.png"
+            alt="Water"
+          />
+          <div class="widget-overlay">
+            <p class="water-intake widget-data"></p>
+          </div>
+        </section>
+        <section class="widget-box">
+          <img
+            class="widget-icon icon-top"
+            src="./images/pink-moon.png"
+            alt="Sleep"
+          />
+          <p class="daily-sleep-hours-box widget-data"></p>
+          <div class="widget-overlay overlay-bottom">
+            <button class="add-btn">+</button>
+            <p class="daily-sleep-quality-box widget-data"></p>
+          </div>
+        </section>
+        <section class="sleep-quality-data">
+          <p class="user-steps"></p>
+          <p class="avg-steps"></p>
+          <section class="average-hours-sleep-box data-box"></section>
+          <section class="average-sleep-quality-box data-box"></section>
+        </section>
+      </div>
+      <div>
+        <h1>Breathe</h1>
+        <section class="user-box">
+          <h2>Hello</h2>
+          <h3>Your Info</h3>
+          <article>
+            <p class="name"></p>
+            <p class="address"></p>
+            <p class="email"></p>
+          </article>
+          <div class="weekly-sleep-data-box"></div>
+          <div class="weekly-water-box"></div>
+          <div class="weekly-sleep-quality-box"></div>
+        </section>
       </div>
     </main>
+    <aside class="add-sleep-data-modal sleep-modal">
+      <div class="modal-form-container">
+        <h2>Sleep</h2>
+        <form action="#">
+          <ul>
+            <li>
+              <label for="begin-time" class="modal-label">Begin Time</label>
+              <input type="time" name="begin-time" id="begin-time" required />
+            </li>
+            <li>
+              <label for="end-time" class="modal-label">End Time</label>
+              <input type="time" name="end-time" id="end-time" required />
+            </li>
+            <li>
+              <label for="sleep-quality" class="modal-label">Quality</label>
+              <input type="number" name="sleep-quality" id="sleep-quality" />
+            </li>
+          </ul>
+          <div class="modal-button-container"><button>Save</button></div>
+        </form>
+      </div>
+    </aside>
     <script src="bundle.js"></script>
   </body>
 </html>
