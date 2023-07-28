@@ -195,8 +195,9 @@ function changeSave() {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log(form.checkValidity())
-  form.checkValidity().reportValidity();
+ 
+  form.checkValidity()
+  form.reportValidity();
 
   toggleAddSleepModal();
   form.reset();
