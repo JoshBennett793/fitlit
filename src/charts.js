@@ -10,7 +10,7 @@ export function WeeklyStepsVsGoal(weekData, goal) {
       datasets: [
         {
           label: 'Actual Steps',
-          data: dates.map(row => row.numSteps),
+          data: dates.map(date => weekData[date]),
           backgroundColor: ['rgb(255,0,152)']
         },
         {
