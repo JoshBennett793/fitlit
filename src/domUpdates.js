@@ -84,8 +84,8 @@ export function displayDailySleepData(sleep) {
   dailySleepBox.innerText = `${dailySleep}`;
 }
 
-export function displayWeeklySleepData(sleep) {
-  weeklySleepHoursChart(sleep)
+export function displayWeeklySleepData(userWeeklySleepData) {
+  weeklySleepHoursChart(userWeeklySleepData)
 }
 
 export function displayDailySleepQuality(sleep) {
@@ -97,8 +97,8 @@ export function displayDailySleepQuality(sleep) {
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
-export function displayWeeklySleepQuality(sleep) {
-  weeklySleepQualityChart(sleep)
+export function displayWeeklySleepQuality(userWeeklySleepData) {
+  weeklySleepQualityChart(userWeeklySleepData)
 }
 
 // Hydration
