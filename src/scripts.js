@@ -155,6 +155,7 @@ function processUserData() {
   displayDailySleepData(userSleepData);
   displayWeeklySleepData(userWeeklySleepData);
   displayDailySleepQuality(userSleepData);
+  console.log(weeklySleepQualityData)
   displayWeeklySleepQuality(weeklySleepQualityData);
   
 
