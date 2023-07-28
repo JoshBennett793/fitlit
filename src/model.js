@@ -58,9 +58,9 @@ export function getWeekly(key, userData, date) {
 
   let weeklyData;
   if (userData.length <= 7) {
-    weeklyData = userData.slice(0, indexOfDate);
+    weeklyData = userData.slice(0);
   } else {
-    weeklyData = userData.slice(indexOfDate - 6, indexOfDate);
+    weeklyData = userData.slice(indexOfDate - 6);
   }
 
   weeklyData.reverse();

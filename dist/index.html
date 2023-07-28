@@ -87,6 +87,31 @@
         </section>
       </aside>
     </main>
+    <aside class="add-sleep-data-modal sleep-modal">
+      <div class="modal-form-container">
+        <div class="modal-header">
+          <h2>Sleep</h2>
+          <button class="exit-modal">X</button>
+        </div>
+        <form action="#">
+          <ul>
+            <li>
+              <label for="begin-time" class="modal-label">Begin Time</label>
+              <input type="time" name="begin-time" id="begin-time" required />
+            </li>
+            <li>
+              <label for="end-time" class="modal-label">End Time</label>
+              <input type="time" name="end-time" id="end-time" required />
+            </li>
+            <li>
+              <label for="sleep-quality" class="modal-label">Quality</label>
+              <input type="number" name="sleep-quality" id="sleep-quality" />
+            </li>
+          </ul>
+          <div class="modal-button-container"><button>Save</button></div>
+        </form>
+      </div>
+    </aside>
     <script src="bundle.js"></script>
   </body>
 </html>
