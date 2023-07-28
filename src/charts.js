@@ -2,8 +2,8 @@ import Chart from 'chart.js/auto';
 import { compareStepsWithGoal } from './model';
 
 export function WeeklyStepsVsGoal(weekData, goal) {
-  const dates = Object.keys(weekData)
-  new Chart(document.getElementById('weekly-steps-bar-chart'), {
+  const dates = Object.keys(weekData);
+  return new Chart(document.getElementById('weekly-steps-bar-chart'), {
     type: 'bar',
     data: {
       labels: dates,
@@ -11,12 +11,12 @@ export function WeeklyStepsVsGoal(weekData, goal) {
         {
           label: 'Actual Steps',
           data: dates.map(date => weekData[date]),
-          backgroundColor: ['rgb(255,0,152)']
+          backgroundColor: ['rgb(255,0,152)'],
         },
         {
           label: 'Step Goal',
           data: dates.map(row => goal),
-          backgroundColor: ['rgb(181,219,253)']
+          backgroundColor: ['rgb(181,219,253)'],
         },
       ],
     },
@@ -24,8 +24,8 @@ export function WeeklyStepsVsGoal(weekData, goal) {
 }
 
 export function weeklySleepQualityChart(weekData) {
-  const dates = Object.keys(weekData)
-  new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
+  const dates = Object.keys(weekData);
+  return new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
     type: 'bar',
     data: {
       labels: dates.map(date => date.slice(5)),
@@ -33,16 +33,16 @@ export function weeklySleepQualityChart(weekData) {
         {
           label: 'Sleep Quality',
           data: dates.map(date => weekData[date]),
-          backgroundColor: ['rgb(255,0,152)']
-        }
-      ]
-    }
-  })
+          backgroundColor: ['rgb(255,0,152)'],
+        },
+      ],
+    },
+  });
 }
 
 export function weeklySleepHoursChart(weekData) {
-  const dates = Object.keys(weekData)
-  new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
+  const dates = Object.keys(weekData);
+  return new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
     type: 'bar',
     data: {
       labels: dates.map(date => date.slice(5)),
@@ -50,16 +50,16 @@ export function weeklySleepHoursChart(weekData) {
         {
           label: 'Hours Slept',
           data: dates.map(date => weekData[date]),
-          backgroundColor: ['rgb(255,0,152)']
-        }
-      ]
-    }
-  })
+          backgroundColor: ['rgb(255,0,152)'],
+        },
+      ],
+    },
+  });
 }
 
 export function weeklyWaterIntakeChart(weekData) {
-  const dates = weekData.map(row => row.date.slice(5)).slice(-7)
-  new Chart(document.getElementById('weekly-water-intake-bar-chart'), {
+  const dates = weekData.map(row => row.date.slice(5)).slice(-7);
+  return new Chart(document.getElementById('weekly-water-intake-bar-chart'), {
     type: 'bar',
     data: {
       labels: dates,
@@ -67,21 +67,21 @@ export function weeklyWaterIntakeChart(weekData) {
         {
           label: 'Weekly Water',
           data: weekData.map(row => row.numOunces).slice(-7),
-          backgroundColor: ['rgb(255,0,152)']
-        }
-      ]
-    }
-  })
+          backgroundColor: ['rgb(255,0,152)'],
+        },
+      ],
+    },
+  });
 }
 
-  export function stepProgressBar(stepData, goal) {
+export function stepProgressBar(stepData, goal) {
   let goalRemainder = 0;
 
   if (compareStepsWithGoal(stepData, goal)) {
     goalRemainder = goal - stepData;
   }
 
-  new Chart(document.getElementById('steps-progress-bar'), {
+  return new Chart(document.getElementById('steps-progress-bar'), {
     type: 'doughnut',
     data: {
       labels: ['Steps', 'Remaining'],
