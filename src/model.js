@@ -64,9 +64,9 @@ export function getWeekly(key, userData, date) {
 
   let weeklyData;
   if (userData.length <= 7) {
-    weeklyData = userData.slice(0, indexOfDate);
+    weeklyData = userData.slice(0);
   } else {
-    weeklyData = userData.slice(indexOfDate - 6, indexOfDate);
+    weeklyData = userData.slice(indexOfDate - 6, indexOfDate + 1);
   }
 
   weeklyData.reverse();
@@ -137,10 +137,8 @@ function calculateTotalTimeSlept(...times) {
   return (diffHour + diffMin / 60).toFixed(1);
 }
 
-export function storeSleepData(e) {
-  e.preventDefault();
-
-  const sleepModalForm = document.querySelector('#sleep-modal-form');
+export function storeSleepData() {
+  const sleepModalForm = document.querySelector('form');
 
   const formData = new FormData(sleepModalForm);
   const values = [...formData.entries()];
@@ -177,9 +175,10 @@ export function storeSleepData(e) {
     .then(() => {
       store.getKey('todaysStepDataChart').destroy();
       store.getKey('weeklyStepDataChart').destroy();
+      store.getKey('weeklySleepDataChart').destroy();
+      store.getKey('weeklySleepQualityChart').destroy();
+      store.getKey('weeklyHydrationDataChart').destroy();
       getAllApiData(store.getKey('user'));
-      sleepModalForm.reset();
-      toggleAddSleepModal();
     })
     .catch(err => console.log(err));
 }

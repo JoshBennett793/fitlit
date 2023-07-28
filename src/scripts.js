@@ -37,6 +37,7 @@ import {
   getUserData,
   getDataByDate,
   getAllTimeAverage,
+  getWeekly,
   // Activity
   calculateDistanceTraveled,
   getMinutesActive,
@@ -49,7 +50,8 @@ import { getApiData } from './apiCalls';
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
-const sleepModalSaveButton = document.querySelector('.modal-save-button');
+const saveFormButton = document.querySelector('.save-btn');
+const form = document.querySelector('form');
 
 function initializeStore() {
   const store = {
@@ -111,8 +113,16 @@ export function processUserData() {
     store.getKey('activityData'),
     user.id,
   );
-  const userWeeklyActivityData = userActivityData.slice(-7);
-  const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
+  const userWeeklyActivityData = getWeekly(
+    'numSteps',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
+  const mostRecentActivityData = getDataByDate(
+    'minutesActive',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
 
   // Step Data
   const userSteps = user.dailyStepGoal;
@@ -128,6 +138,16 @@ export function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
+  const userWeeklySleepData = getWeekly(
+    'hoursSlept',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
+  const weeklySleepQualityData = getWeekly(
+    'sleepQuality',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -135,6 +155,7 @@ export function processUserData() {
     store.getKey('hydrationData'),
     user.id,
   );
+  const userWeeklyHydrationData = userHydrationData.slice(-7);
 
   // Display User Data
   displayUserData(user);
@@ -154,9 +175,15 @@ export function processUserData() {
   // Display Sleep Data
   sleepAverage(userSleepData);
   displayDailySleepData(userSleepData);
-  displayWeeklySleepData(userSleepData);
+  store.setKey(
+    'weeklySleepDataChart',
+    displayWeeklySleepData(userWeeklySleepData),
+  );
   displayDailySleepQuality(userSleepData);
-  displayWeeklySleepQuality(userSleepData);
+  store.setKey(
+    'weeklySleepQualityChart',
+    displayWeeklySleepQuality(weeklySleepQualityData),
+  );
 
   // Display Hydration Data
   displayCurrentDayWaterIntake(
@@ -166,17 +193,46 @@ export function processUserData() {
       getCurrentDate(userHydrationData),
     ),
   );
-  displayWeeklyWaterIntake(userHydrationData);
+  store.setKey(
+    'weeklyHydrationDataChart',
+    displayWeeklyWaterIntake(userWeeklyHydrationData),
+  );
 
   // Display Activity Data
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
-  displayTimeActive(getMinutesActive(mostRecentActivityData));
+  displayTimeActive(mostRecentActivityData);
 }
 
 // Event Listeners
 
-addSleepDataButton.onclick = toggleAddSleepModal;
-exitModalButton.onclick = toggleAddSleepModal;
-sleepModalSaveButton.onclick = storeSleepData;
+addSleepDataButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+});
+exitModalButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+  form.reset();
+});
+
+form.addEventListener('keyup', changeSave);
+form.addEventListener('click', changeSave);
+
+function changeSave() {
+  if (form.checkValidity()) {
+    saveFormButton.classList.add('neon');
+  } else {
+    saveFormButton.classList.remove('neon');
+  }
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  form.reportValidity();
+  storeSleepData();
+
+  toggleAddSleepModal();
+  form.reset();
+});
+// sleepModalSaveButton.onclick = storeSleepData;

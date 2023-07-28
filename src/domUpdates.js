@@ -1,4 +1,10 @@
-import { WeeklyStepsVsGoal, stepProgressBar } from './charts';
+import {
+  WeeklyStepsVsGoal,
+  stepProgressBar,
+  weeklySleepQualityChart,
+  weeklySleepHoursChart,
+  weeklyWaterIntakeChart,
+} from './charts';
 import {
   getWeekly,
   getCurrentDate,
@@ -22,8 +28,7 @@ const allTimeSleepQuality = document.querySelector(
 const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
-const weeklySleepQuality = document.querySelector('.weekly-sleep-quality-box');
-const sleepModal = document.querySelector('.add-sleep-data-modal');
+const sleepModal = document.querySelector('.sleep-modal');
 
 // User
 
@@ -85,9 +90,8 @@ export function displayDailySleepData(sleep) {
   dailySleepBox.innerText = `${dailySleep}`;
 }
 
-export function displayWeeklySleepData(sleep) {
-  const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
-  const sleeps = Object.keys(weeklySleep);
+export function displayWeeklySleepData(userWeeklySleepData) {
+  return weeklySleepHoursChart(userWeeklySleepData);
 }
 
 export function displayDailySleepQuality(sleep) {
@@ -101,16 +105,8 @@ export function displayDailySleepQuality(sleep) {
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
-export function displayWeeklySleepQuality(sleep) {
-  const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
-  const sleepQuality = Object.keys(weeklyQuality);
-  
-  const dailySleepQuality = getDataByDate(
-    'sleepQuality',
-    sleep,
-    getCurrentDate(sleep),
-  );
-  dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
+export function displayWeeklySleepQuality(userWeeklySleepData) {
+  return weeklySleepQualityChart(userWeeklySleepData);
 }
 
 // Hydration
@@ -119,13 +115,8 @@ export function displayCurrentDayWaterIntake(currentIntake) {
   waterIntake.innerText = `Today : ${currentIntake} ounces`;
 }
 
-export function displayWeeklyWaterIntake(userHydrationData) {
-  const weeklyWater = getWeekly(
-    'numOunces',
-    userHydrationData,
-    getCurrentDate(userHydrationData),
-  );
-  const days = Object.keys(weeklyWater);
+export function displayWeeklyWaterIntake(userWeeklyHydrationData) {
+  return weeklyWaterIntakeChart(userWeeklyHydrationData);
 }
 
 export function toggleAddSleepModal() {
