@@ -43,13 +43,14 @@ import {
   getMinutesActive,
   // Utility
   getCurrentDate,
-
 } from './model';
 import { getApiData, setApiData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
+const saveFormButton = document.querySelector('.save-btn');
+const form = document.querySelector('form');
 
 function initializeStore() {
   const store = {
@@ -111,8 +112,16 @@ function processUserData() {
     store.getKey('activityData'),
     user.id,
   );
-  const userWeeklyActivityData = getWeekly('numSteps', userActivityData, getCurrentDate(userActivityData));
-  const mostRecentActivityData = getDataByDate('minutesActive', userActivityData, getCurrentDate(userActivityData));
+  const userWeeklyActivityData = getWeekly(
+    'numSteps',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
+  const mostRecentActivityData = getDataByDate(
+    'minutesActive',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
 
   // Step Data
   const userSteps = user.dailyStepGoal;
@@ -128,10 +137,16 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  const userWeeklySleepData = getWeekly('hoursSlept', userSleepData, getCurrentDate
-  (userSleepData));
-  const weeklySleepQualityData = getWeekly('sleepQuality', userSleepData, getCurrentDate(userSleepData))
-
+  const userWeeklySleepData = getWeekly(
+    'hoursSlept',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
+  const weeklySleepQualityData = getWeekly(
+    'sleepQuality',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -139,7 +154,7 @@ function processUserData() {
     store.getKey('hydrationData'),
     user.id,
   );
-  const userWeeklyHydrationData = userHydrationData.slice(-7)
+  const userWeeklyHydrationData = userHydrationData.slice(-7);
 
   // Display User Data
   displayUserData(store.getKey('user'));
@@ -147,16 +162,27 @@ function processUserData() {
 
   // Display Step Data
   displayUserStepsVsAvg(userSteps, avg);
-  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+  store.setKey(
+    'todaysStepDataChart',
+    displayTodaysStepData(dailyStepData, user.dailyStepGoal),
+  );
+  store.setKey(
+    'weeklyStepDataChart',
+    displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal),
+  );
 
   // Display Sleep Data
   sleepAverage(userSleepData);
   displayDailySleepData(userSleepData);
-  displayWeeklySleepData(userWeeklySleepData);
+  store.setKey(
+    'weeklySleepDataChart',
+    displayWeeklySleepData(userWeeklySleepData),
+  );
   displayDailySleepQuality(userSleepData);
-  displayWeeklySleepQuality(weeklySleepQualityData);
-  
+  store.setKey(
+    'weeklySleepQualityChart',
+    displayWeeklySleepQuality(weeklySleepQualityData),
+  );
 
   // Display Hydration Data
   displayCurrentDayWaterIntake(
@@ -166,7 +192,10 @@ function processUserData() {
       getCurrentDate(userHydrationData),
     ),
   );
-  displayWeeklyWaterIntake(userWeeklyHydrationData);
+  store.setKey(
+    'weeklyHydrationDataChart',
+    displayWeeklyWaterIntake(userWeeklyHydrationData),
+  );
 
   // Display Activity Data
   displayDistanceTraveled(
@@ -177,5 +206,31 @@ function processUserData() {
 
 // Event Listeners
 
-addSleepDataButton.onclick = toggleAddSleepModal;
-exitModalButton.onclick = toggleAddSleepModal;
+addSleepDataButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+});
+exitModalButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+  form.reset();
+});
+
+form.addEventListener('keyup', changeSave);
+form.addEventListener('click', changeSave);
+
+function changeSave() {
+  if (form.checkValidity()) {
+    saveFormButton.classList.add('neon');
+  } else {
+    saveFormButton.classList.remove('neon');
+  }
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  form.checkValidity();
+  form.reportValidity();
+
+  toggleAddSleepModal();
+  form.reset();
+});

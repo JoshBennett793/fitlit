@@ -1,4 +1,10 @@
-import { WeeklyStepsVsGoal, stepProgressBar, weeklySleepQualityChart, weeklySleepHoursChart, weeklyWaterIntakeChart} from './charts';
+import {
+  WeeklyStepsVsGoal,
+  stepProgressBar,
+  weeklySleepQualityChart,
+  weeklySleepHoursChart,
+  weeklyWaterIntakeChart,
+} from './charts';
 import {
   getWeekly,
   getCurrentDate,
@@ -22,7 +28,6 @@ const allTimeSleepQuality = document.querySelector(
 const allTimeSleepHours = document.querySelector('.average-hours-sleep-box');
 const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
-
 
 // User
 
@@ -51,12 +56,12 @@ export function displayUserStepsVsAvg(userSteps, avg) {
 }
 
 export function displayTodaysStepData(stepData, goal) {
-  stepProgressBar(stepData, goal);
   stepBox.innerText = `${stepData} Steps`;
+  return stepProgressBar(stepData, goal);
 }
 
 export function displayWeeklyStepData(weekData, goal) {
-  WeeklyStepsVsGoal(weekData, goal);
+  return WeeklyStepsVsGoal(weekData, goal);
 }
 
 // Activity
@@ -85,20 +90,20 @@ export function displayDailySleepData(sleep) {
 }
 
 export function displayWeeklySleepData(userWeeklySleepData) {
-  weeklySleepHoursChart(userWeeklySleepData)
+  return weeklySleepHoursChart(userWeeklySleepData);
 }
 
 export function displayDailySleepQuality(sleep) {
   const dailySleepQuality = getDataByDate(
     'sleepQuality',
-     sleep,
+    sleep,
     getCurrentDate(sleep),
   );
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
 export function displayWeeklySleepQuality(userWeeklySleepData) {
-  weeklySleepQualityChart(userWeeklySleepData)
+  return weeklySleepQualityChart(userWeeklySleepData);
 }
 
 // Hydration
@@ -108,7 +113,7 @@ export function displayCurrentDayWaterIntake(currentIntake) {
 }
 
 export function displayWeeklyWaterIntake(userWeeklyHydrationData) {
-  weeklyWaterIntakeChart(userWeeklyHydrationData)
+  return weeklyWaterIntakeChart(userWeeklyHydrationData);
 }
 
 export function toggleAddSleepModal() {
