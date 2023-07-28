@@ -48,7 +48,8 @@ import { getApiData, setApiData } from './apiCalls';
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
-const saveSleepDataButton = document.querySelector('.save-btn')
+const saveFormButton = document.querySelector('.save-btn');
+const form = document.querySelector('form');
 
 function initializeStore() {
   const store = {
@@ -177,10 +178,26 @@ addSleepDataButton.addEventListener('click', () => {
 })
 exitModalButton.addEventListener('click', () => {
   toggleAddSleepModal();
+  form.reset();
 })
 
-saveSleepDataButton.addEventListener('click', (e) => {
-  document.querySelector('form').checkValidity();
-  document.querySelector('form').reportValidity();
+form.addEventListener('keyup', changeSave)
+form.addEventListener('click', changeSave)
+
+function changeSave() {
+  if (form.checkValidity()) {
+    saveFormButton.classList.add('neon')
+  } else {
+    saveFormButton.classList.remove('neon')
+  }
+  
+}
+
+form.addEventListener('submit', (e) => {
   e.preventDefault();
+  console.log(form.checkValidity())
+  form.checkValidity().reportValidity();
+
+  toggleAddSleepModal();
+  form.reset();
 })
