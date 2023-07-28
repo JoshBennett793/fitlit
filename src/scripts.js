@@ -172,7 +172,7 @@ function processUserData() {
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
-  displayTimeActive(getMinutesActive(mostRecentActivityData));
+  displayTimeActive(mostRecentActivityData);
 }
 
 // Event Listeners
