@@ -130,7 +130,6 @@ function processUserData() {
   );
   // setApiData('http://localhost:3001/api/v1/sleep');
 
-
   // Hydration Data
   const userHydrationData = getUserData(
     'hydrationData',
@@ -175,30 +174,29 @@ function processUserData() {
 
 addSleepDataButton.addEventListener('click', () => {
   toggleAddSleepModal();
-})
+});
 exitModalButton.addEventListener('click', () => {
   toggleAddSleepModal();
   form.reset();
-})
+});
 
-form.addEventListener('keyup', changeSave)
-form.addEventListener('click', changeSave)
+form.addEventListener('keyup', changeSave);
+form.addEventListener('click', changeSave);
 
 function changeSave() {
   if (form.checkValidity()) {
-    saveFormButton.classList.add('neon')
+    saveFormButton.classList.add('neon');
   } else {
-    saveFormButton.classList.remove('neon')
+    saveFormButton.classList.remove('neon');
   }
-  
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', e => {
   e.preventDefault();
- 
-  form.checkValidity()
+
+  form.checkValidity();
   form.reportValidity();
 
   toggleAddSleepModal();
   form.reset();
-})
+});
