@@ -42,14 +42,14 @@ import {
   getMinutesActive,
   // Utility
   getCurrentDate,
-  calculateTotalTimeSlept,
-  sendSleepDataToAPI,
+  storeSleepData,
 } from './model';
-import { getApiData, setApiData } from './apiCalls';
+import { getApiData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
+const sleepModalSaveButton = document.querySelector('.modal-save-button');
 
 function initializeStore() {
   const store = {
@@ -74,14 +74,14 @@ function initializeStore() {
   };
 }
 
-let store;
+export let store;
 
 window.onload = () => {
   store = initializeStore();
-  initializeApp();
+  getAllApiData();
 };
 
-function initializeApp() {
+export function getAllApiData(user) {
   Promise.all([
     getApiData(store.getAPIKey('users'), 'users'),
     getApiData(store.getAPIKey('sleep'), 'sleepData'),
@@ -91,7 +91,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
-      store.setKey('user', getRandomUser(users));
+      store.setKey('user', user || getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -99,7 +99,7 @@ function initializeApp() {
     .then(processUserData);
 }
 
-function processUserData() {
+export function processUserData() {
   // User Data
   const user = store.getKey('user');
   const userData = store.getKey('userData');
@@ -128,7 +128,6 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  // setApiData('http://localhost:3001/api/v1/sleep');
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -138,13 +137,19 @@ function processUserData() {
   );
 
   // Display User Data
-  displayUserData(store.getKey('user'));
-  displayUsersName(store.getKey('user'));
+  displayUserData(user);
+  displayUsersName(user);
 
   // Display Step Data
   displayUserStepsVsAvg(userSteps, avg);
-  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+  store.setKey(
+    'todaysStepDataChart',
+    displayTodaysStepData(dailyStepData, user.dailyStepGoal),
+  );
+  store.setKey(
+    'weeklyStepDataChart',
+    displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal),
+  );
 
   // Display Sleep Data
   sleepAverage(userSleepData);
@@ -172,26 +177,6 @@ function processUserData() {
 
 // Event Listeners
 
-const sleepModalSaveButton = document.querySelector('.modal-save-button');
-const sleepModalForm = document.querySelector('#sleep-modal-form');
-
 addSleepDataButton.onclick = toggleAddSleepModal;
 exitModalButton.onclick = toggleAddSleepModal;
-sleepModalSaveButton.onclick = e => {
-  e.preventDefault();
-
-  const formData = new FormData(sleepModalForm);
-  const values = [...formData.entries()];
-  const formattedValues = values.reduce((acc, value) => {
-    acc[value[0]] = value[1];
-    return acc;
-  }, {});
-
-  const totalTimeSlept = calculateTotalTimeSlept(
-    formattedValues['begin-time'],
-    formattedValues['end-time'],
-  );
-
-  sleepModalForm.reset();
-  toggleAddSleepModal();
-};
+sleepModalSaveButton.onclick = storeSleepData;

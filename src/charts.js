@@ -3,7 +3,7 @@ import { compareStepsWithGoal } from './model';
 
 export function WeeklyStepsVsGoal(weekData, goal) {
   const dates = weekData.map(row => row.date.slice(5))
-  new Chart(document.getElementById('weekly-steps-bar-chart'), {
+  return new Chart(document.getElementById('weekly-steps-bar-chart'), {
     type: 'bar',
     data: {
       labels: dates,
@@ -30,7 +30,7 @@ export function stepProgressBar(stepData, goal) {
     goalRemainder = goal - stepData;
   }
 
-  new Chart(document.getElementById('steps-progress-bar'), {
+  return new Chart(document.getElementById('steps-progress-bar'), {
     type: 'doughnut',
     data: {
       labels: ['Steps', 'Remaining'],

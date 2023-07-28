@@ -52,12 +52,12 @@ export function displayUserStepsVsAvg(userSteps, avg) {
 }
 
 export function displayTodaysStepData(stepData, goal) {
-  stepProgressBar(stepData, goal);
   stepBox.innerText = `${stepData} Steps`;
+  return stepProgressBar(stepData, goal);
 }
 
 export function displayWeeklyStepData(weekData, goal) {
-  WeeklyStepsVsGoal(weekData, goal);
+  return WeeklyStepsVsGoal(weekData, goal);
 }
 
 // Activity
@@ -88,12 +88,6 @@ export function displayDailySleepData(sleep) {
 export function displayWeeklySleepData(sleep) {
   const weeklySleep = getWeekly('hoursSlept', sleep, getCurrentDate(sleep));
   const sleeps = Object.keys(weeklySleep);
-  sleeps.forEach(day => {
-    weeklySleepBox.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklySleep[day]}h</p>
-    </article>`;
-  });
 }
 
 export function displayDailySleepQuality(sleep) {
@@ -102,18 +96,15 @@ export function displayDailySleepQuality(sleep) {
     sleep,
     getCurrentDate(sleep),
   );
+
+  dailyQualitySleepBox.innerText = '';
   dailyQualitySleepBox.innerText = `${dailySleepQuality}`;
 }
 
 export function displayWeeklySleepQuality(sleep) {
   const weeklyQuality = getWeekly('sleepQuality', sleep, getCurrentDate(sleep));
   const sleepQuality = Object.keys(weeklyQuality);
-  sleepQuality.forEach(day => {
-    weeklySleepQuality.innerHTML += `<article class="week-day" >
-    <p class="date" >${day.slice(5)}</p>
-    <p class="weekly-ounces">${weeklyQuality[day]}</p>
-    </article>`;
-  });
+  
   const dailySleepQuality = getDataByDate(
     'sleepQuality',
     sleep,
@@ -135,14 +126,6 @@ export function displayWeeklyWaterIntake(userHydrationData) {
     getCurrentDate(userHydrationData),
   );
   const days = Object.keys(weeklyWater);
-  days.forEach(day => {
-    weeklyWaterIntake.innerHTML += `<article class="week-day" >
-                                    <p class="date" >${day.slice(5)}</p>
-                                    <p class="weekly-ounces">${
-                                      weeklyWater[day]
-                                    }oz</p>
-                                    </article>`;
-  });
 }
 
 export function toggleAddSleepModal() {
