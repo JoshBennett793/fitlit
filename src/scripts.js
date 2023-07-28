@@ -37,11 +37,13 @@ import {
   getUserData,
   getDataByDate,
   getAllTimeAverage,
+  getWeekly,
   // Activity
   calculateDistanceTraveled,
   getMinutesActive,
   // Utility
   getCurrentDate,
+
 } from './model';
 import { getApiData, setApiData } from './apiCalls';
 
@@ -111,8 +113,8 @@ function processUserData() {
     store.getKey('activityData'),
     user.id,
   );
-  const userWeeklyActivityData = userActivityData.slice(-7);
-  const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
+  const userWeeklyActivityData = getWeekly('numSteps', userActivityData, getCurrentDate(userActivityData));
+  const mostRecentActivityData = getDataByDate('minutesActive', userActivityData, getCurrentDate(userActivityData));
 
   // Step Data
   const userSteps = user.dailyStepGoal;
@@ -128,7 +130,9 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  // setApiData('http://localhost:3001/api/v1/sleep');
+  const userWeeklySleepData = getWeekly('hoursSlept', userSleepData, getCurrentDate
+  (userSleepData));
+  const weeklySleepQualityData = getWeekly('sleepQuality', userSleepData, getCurrentDate(userSleepData))
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -136,6 +140,7 @@ function processUserData() {
     store.getKey('hydrationData'),
     user.id,
   );
+  const userWeeklyHydrationData = userHydrationData.slice(-7)
 
   // Display User Data
   displayUserData(store.getKey('user'));
@@ -149,9 +154,10 @@ function processUserData() {
   // Display Sleep Data
   sleepAverage(userSleepData);
   displayDailySleepData(userSleepData);
-  displayWeeklySleepData(userSleepData);
+  displayWeeklySleepData(userWeeklySleepData);
   displayDailySleepQuality(userSleepData);
-  displayWeeklySleepQuality(userSleepData);
+  displayWeeklySleepQuality(weeklySleepQualityData);
+  
 
   // Display Hydration Data
   displayCurrentDayWaterIntake(
@@ -161,13 +167,13 @@ function processUserData() {
       getCurrentDate(userHydrationData),
     ),
   );
-  displayWeeklyWaterIntake(userHydrationData);
+  displayWeeklyWaterIntake(userWeeklyHydrationData);
 
   // Display Activity Data
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
-  displayTimeActive(getMinutesActive(mostRecentActivityData));
+  displayTimeActive(mostRecentActivityData);
 }
 
 // Event Listeners
