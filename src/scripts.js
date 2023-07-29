@@ -215,17 +215,6 @@ exitModalButton.addEventListener('click', () => {
   form.reset();
 });
 
-form.addEventListener('keyup', changeSave);
-form.addEventListener('click', changeSave);
-
-function changeSave() {
-  if (form.checkValidity()) {
-    saveFormButton.classList.add('neon');
-  } else {
-    saveFormButton.classList.remove('neon');
-  }
-}
-
 form.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -235,4 +224,3 @@ form.addEventListener('submit', e => {
   toggleAddSleepModal();
   form.reset();
 });
-// sleepModalSaveButton.onclick = storeSleepData;
