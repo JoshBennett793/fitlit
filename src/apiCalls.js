@@ -35,7 +35,7 @@ export function setApiData(url, userID, date, hoursSlept, sleepQuality) {
       } else {
         // ALL OTHER ERRORS
         throw new Error(
-          `There that been an error: ${response.status} ${response.statusText}`,
+          `There has been an error: ${response.status} ${response.statusText}`,
         );
       }
     })
