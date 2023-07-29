@@ -19,14 +19,6 @@
   <body>
     <main>
       <div class="widget-grid">
-        <section class="steps-widget neon">
-          <div class="steps-circle">
-            <canvas id="steps-progress-bar" width="170"></canvas>
-            <div class="donut-inner">
-              <p id="current-steps"></p>
-            </div>
-          </div>
-        </section>
         <section class="widget-box neon">
           <img class="widget-icon" src="./images/distance.svg" alt="Miles" />
           <div class="widget-overlay">
@@ -38,9 +30,6 @@
           <div class="widget-overlay">
             <p class="active-value widget-data"></p>
           </div>
-        </section>
-        <section class="weekly-steps neon grid-col-span-2">
-          <canvas id="weekly-steps-bar-chart"></canvas>
         </section>
         <section class="widget-box neon">
           <img
@@ -64,11 +53,28 @@
             <p class="daily-sleep-quality-box widget-data"></p>
           </div>
         </section>
-        <section class="sleep-quality-data">
+        <section class="square-widget neon">
+          <div class="steps-circle">
+            <canvas id="steps-progress-bar" width="170"></canvas>
+            <div class="donut-inner">
+              <p id="current-steps"></p>
+            </div>
+          </div>
+        </section>
+        <section class="weekly-chart neon grid-col-span-2">
+          <canvas id="weekly-steps-bar-chart"></canvas>
+        </section>
+        <section class="square-widget neon">
           <p class="user-steps"></p>
           <p class="avg-steps"></p>
           <section class="average-hours-sleep-box data-box"></section>
           <section class="average-sleep-quality-box data-box"></section>
+        </section>
+        <section class="weekly-chart neon grid-col-span-2">
+          <canvas id="weekly-sleep-hours-bar-chart"></canvas>
+        </section>
+        <section class="weekly-chart neon grid-col-span-2">
+          <canvas id="weekly-sleep-quality-bar-chart"></canvas>
         </section>
       </div>
       <aside>
@@ -80,14 +86,10 @@
             <p class="name"></p>
             <p class="address"></p>
             <p class="email"></p>
+            <section class="weekly-chart neon grid-col-span-2">
+              <canvas id="weekly-water-intake-bar-chart"></canvas>
+            </section>
           </article>
-          <div class="weekly-sleep-data-box"></div>
-          <canvas id="weekly-sleep-hours-bar-chart"></canvas>
-      <div class="weekly-water-box"></div>
-        <canvas id="weekly-water-intake-bar-chart"></canvas>
-      <div class="weekly-sleep-quality-box">
-          <canvas id="weekly-sleep-quality-bar-chart"></canvas>
-      </div>
         </section>
       </aside>
     </main>

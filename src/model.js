@@ -60,7 +60,7 @@ export function getWeekly(key, userData, date) {
   if (userData.length <= 7) {
     weeklyData = userData.slice(0);
   } else {
-    weeklyData = userData.slice(indexOfDate - 6);
+    weeklyData = userData.slice(indexOfDate - 6, indexOfDate + 1);
   }
 
   weeklyData.reverse();

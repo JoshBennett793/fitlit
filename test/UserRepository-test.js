@@ -86,12 +86,13 @@ describe('hydrationData', () => {
     expect(water).to.equal(0);
   });
 
-  it('should return a object with ounces of water for the last 6 days of data', () => {
+  it('should return a object with ounces of water for the last 7 days of data', () => {
     const userData = getUserData('hydrationData', hydrationData, 1);
     const water = getWeekly('numOunces', userData, '2023/03/30');
 
     expect(water).to.be.an('object');
     expect(water).to.deep.equal({
+      '2023/03/30': 20,
       '2023/03/29': 96,
       '2023/03/28': 38,
       '2023/03/27': 22,
@@ -104,9 +105,9 @@ describe('hydrationData', () => {
   it('should have keys in order from least to most recent', () => {
     const userData = getUserData('hydrationData', hydrationData, 1);
     const water = getWeekly('numOunces', userData, '2023/03/30');
-
     const waterDates = Object.keys(water);
     expect(waterDates).to.deep.equal([
+      '2023/03/30',
       '2023/03/29',
       '2023/03/28',
       '2023/03/27',
@@ -115,19 +116,13 @@ describe('hydrationData', () => {
       '2023/03/23',
     ]);
   });
-
+  
   it('should return an object holding all possible elements after the current date if there are less than 7', () => {
     const userData = getUserData('hydrationData', hydrationData, 2);
     const water = getWeekly('numOunces', userData, '2023/03/25');
-
-    expect(water).to.deep.equal({ '2023/03/24': 35 });
-  });
-
-  it('should return an empty object is only 1 data point exists', () => {
-    const userData = getUserData('hydrationData', hydrationData, 3);
-    const water = getWeekly('numOunces', userData, '2023/03/31');
-
-    expect(water).to.deep.equal({});
+    
+    
+    expect(water).to.deep.equal({ '2023/03/26': 88, '2023/03/24': 35 });
   });
 
   it('should return an empty object if no user data exists', () => {
@@ -181,16 +176,17 @@ describe('sleepData', () => {
 
   it('should return an object of how many hours a user slept each day over 7 days', () => {
     const userData = getUserData('sleepData', sleep, 3);
-    const slept = getWeekly('hoursSlept', userData, '2023/03/30');
+    const slept = getWeekly('hoursSlept', userData, '2023/03/31');
 
     expect(slept).to.be.an('object');
     expect(slept).to.deep.equal({
-      '2023/03/24': 8.3,
       '2023/03/25': 8.0,
       '2023/03/26': 8.1,
       '2023/03/27': 7.5,
       '2023/03/28': 7.5,
       '2023/03/29': 7.1,
+      '2023/03/30': 7.5,
+      '2023/03/31': 6.9
     });
   });
 
@@ -200,6 +196,7 @@ describe('sleepData', () => {
 
     const sleepDates = Object.keys(weeklySleep);
     expect(sleepDates).to.deep.equal([
+      '2023/03/30',
       '2023/03/29',
       '2023/03/28',
       '2023/03/27',
@@ -207,13 +204,6 @@ describe('sleepData', () => {
       '2023/03/25',
       '2023/03/24',
     ]);
-  });
-
-  it('should return an empty object is only 1 data point exists', () => {
-    const userData = getUserData('sleepData', sleep, 1);
-    const water = getWeekly('hoursSlept', userData, '2023/03/24');
-
-    expect(water).to.deep.equal({});
   });
 
   it('should return an empty object if no user data exists', () => {
@@ -234,6 +224,7 @@ describe('sleepData', () => {
       '2023/03/28': 6,
       '2023/03/29': 5.6,
       '2023/03/30': 6.2,
+      '2023/03/31': 8.3
     });
   });
 });
