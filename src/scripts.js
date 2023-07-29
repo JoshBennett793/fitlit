@@ -29,6 +29,7 @@ import {
   // Hydration
   displayCurrentDayWaterIntake,
   displayWeeklyWaterIntake,
+  storeSleepData,
 } from './domUpdates';
 
 import {
@@ -43,7 +44,6 @@ import {
   getMinutesActive,
   // Utility
   getCurrentDate,
-  storeSleepData,
 } from './model';
 import { getApiData } from './apiCalls';
 
