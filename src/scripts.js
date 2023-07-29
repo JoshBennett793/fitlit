@@ -29,6 +29,7 @@ import {
   // Hydration
   displayCurrentDayWaterIntake,
   displayWeeklyWaterIntake,
+  storeSleepData,
 } from './domUpdates';
 
 import {
@@ -43,13 +44,14 @@ import {
   getMinutesActive,
   // Utility
   getCurrentDate,
-
 } from './model';
-import { getApiData, setApiData } from './apiCalls';
+import { getApiData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
+const saveFormButton = document.querySelector('.save-btn');
+const form = document.querySelector('form');
 
 function initializeStore() {
   const store = {
@@ -74,14 +76,14 @@ function initializeStore() {
   };
 }
 
-let store;
+export let store;
 
 window.onload = () => {
   store = initializeStore();
-  initializeApp();
+  getAllApiData();
 };
 
-function initializeApp() {
+export function getAllApiData(user) {
   Promise.all([
     getApiData(store.getAPIKey('users'), 'users'),
     getApiData(store.getAPIKey('sleep'), 'sleepData'),
@@ -91,7 +93,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
-      store.setKey('user', getRandomUser(users));
+      store.setKey('user', user || getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -99,7 +101,7 @@ function initializeApp() {
     .then(processUserData);
 }
 
-function processUserData() {
+export function processUserData() {
   // User Data
   const user = store.getKey('user');
   const userData = store.getKey('userData');
@@ -111,8 +113,16 @@ function processUserData() {
     store.getKey('activityData'),
     user.id,
   );
-  const userWeeklyActivityData = getWeekly('numSteps', userActivityData, getCurrentDate(userActivityData));
-  const mostRecentActivityData = getDataByDate('minutesActive', userActivityData, getCurrentDate(userActivityData));
+  const userWeeklyActivityData = getWeekly(
+    'numSteps',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
+  const mostRecentActivityData = getDataByDate(
+    'minutesActive',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
 
   // Step Data
   const userSteps = user.dailyStepGoal;
@@ -128,10 +138,16 @@ function processUserData() {
     store.getKey('sleepData'),
     user.id,
   );
-  const userWeeklySleepData = getWeekly('hoursSlept', userSleepData, getCurrentDate
-  (userSleepData));
-  const weeklySleepQualityData = getWeekly('sleepQuality', userSleepData, getCurrentDate(userSleepData))
-
+  const userWeeklySleepData = getWeekly(
+    'hoursSlept',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
+  const weeklySleepQualityData = getWeekly(
+    'sleepQuality',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
 
   // Hydration Data
   const userHydrationData = getUserData(
@@ -139,25 +155,35 @@ function processUserData() {
     store.getKey('hydrationData'),
     user.id,
   );
-  const userWeeklyHydrationData = userHydrationData.slice(-7)
+  const userWeeklyHydrationData = userHydrationData.slice(-7);
 
   // Display User Data
-  displayUserData(store.getKey('user'));
-  displayUsersName(store.getKey('user'));
+  displayUserData(user);
+  displayUsersName(user);
 
   // Display Step Data
   displayUserStepsVsAvg(userSteps, avg);
-  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
+  store.setKey(
+    'todaysStepDataChart',
+    displayTodaysStepData(dailyStepData, user.dailyStepGoal),
+  );
+  store.setKey(
+    'weeklyStepDataChart',
+    displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal),
+  );
 
   // Display Sleep Data
   sleepAverage(userSleepData);
   displayDailySleepData(userSleepData);
-  displayWeeklySleepData(userWeeklySleepData);
+  store.setKey(
+    'weeklySleepDataChart',
+    displayWeeklySleepData(userWeeklySleepData),
+  );
   displayDailySleepQuality(userSleepData);
-  console.log(weeklySleepQualityData)
-  displayWeeklySleepQuality(weeklySleepQualityData);
-  
+  store.setKey(
+    'weeklySleepQualityChart',
+    displayWeeklySleepQuality(weeklySleepQualityData),
+  );
 
   // Display Hydration Data
   displayCurrentDayWaterIntake(
@@ -167,7 +193,10 @@ function processUserData() {
       getCurrentDate(userHydrationData),
     ),
   );
-  displayWeeklyWaterIntake(userWeeklyHydrationData);
+  store.setKey(
+    'weeklyHydrationDataChart',
+    displayWeeklyWaterIntake(userWeeklyHydrationData),
+  );
 
   // Display Activity Data
   displayDistanceTraveled(
@@ -178,5 +207,32 @@ function processUserData() {
 
 // Event Listeners
 
-addSleepDataButton.onclick = toggleAddSleepModal;
-exitModalButton.onclick = toggleAddSleepModal;
+addSleepDataButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+});
+exitModalButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+  form.reset();
+});
+
+form.addEventListener('keyup', changeSave);
+form.addEventListener('click', changeSave);
+
+function changeSave() {
+  if (form.checkValidity()) {
+    saveFormButton.classList.add('neon');
+  } else {
+    saveFormButton.classList.remove('neon');
+  }
+}
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  form.reportValidity();
+  storeSleepData();
+
+  toggleAddSleepModal();
+  form.reset();
+});
+// sleepModalSaveButton.onclick = storeSleepData;

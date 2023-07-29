@@ -5,7 +5,7 @@ export function getApiData(url, dataKey) {
 }
 
 export function setApiData(url, userID, date, hoursSlept, sleepQuality) {
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     body: JSON.stringify({
       userID,
@@ -18,6 +18,6 @@ export function setApiData(url, userID, date, hoursSlept, sleepQuality) {
     },
   })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(data => data)
     .catch(error => console.log('error', error));
 }

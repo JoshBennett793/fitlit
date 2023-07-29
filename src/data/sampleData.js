@@ -83,7 +83,7 @@ export default {
       userID: 3,
       date: '2023/03/31',
       numOunces: 86,
-    }
+    },
   ],
   sleepData: [
     {
@@ -310,4 +310,3 @@ export default {
     },
   ],
 };
-

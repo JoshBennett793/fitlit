@@ -99,7 +99,7 @@
           <h2>Sleep</h2>
           <button class="exit-modal">X</button>
         </div>
-        <form action="#">
+        <form id="sleep-modal-form" action="#">
           <ul>
             <li>
               <label for="begin-time" class="modal-label">Begin Time</label>
@@ -111,10 +111,19 @@
             </li>
             <li>
               <label for="sleep-quality" class="modal-label">Quality</label>
-              <input type="number" name="sleep-quality" id="sleep-quality" />
+              <input
+                type="number"
+                name="sleep-quality"
+                id="sleep-quality"
+                min="1"
+                max="5"
+                required
+              />
             </li>
           </ul>
-          <div class="modal-button-container"><button>Save</button></div>
+          <div class="modal-button-container">
+            <button class="save-btn">Save</button>
+          </div>
         </form>
       </div>
     </aside>
