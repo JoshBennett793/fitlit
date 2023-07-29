@@ -29,7 +29,6 @@ import {
   // Hydration
   displayCurrentDayWaterIntake,
   displayWeeklyWaterIntake,
-  storeSleepData,
 } from './domUpdates';
 
 import {
@@ -41,9 +40,9 @@ import {
   getWeekly,
   // Activity
   calculateDistanceTraveled,
-  getMinutesActive,
   // Utility
   getCurrentDate,
+  storeSleepData,
 } from './model';
 import { getApiData } from './apiCalls';
 
@@ -52,6 +51,7 @@ const addSleepDataButton = document.querySelector('.add-btn');
 const exitModalButton = document.querySelector('.exit-modal');
 const saveFormButton = document.querySelector('.save-btn');
 const form = document.querySelector('form');
+const errorMsg = document.querySelector('.modal-error-message');
 
 function initializeStore() {
   const store = {
@@ -233,6 +233,6 @@ form.addEventListener('submit', e => {
   storeSleepData();
 
   toggleAddSleepModal();
+  errorMsg.innerText = '';
   form.reset();
 });
-// sleepModalSaveButton.onclick = storeSleepData;
