@@ -29,6 +29,7 @@ import {
   // Hydration
   displayCurrentDayWaterIntake,
   displayWeeklyWaterIntake,
+  storeSleepData,
 } from './domUpdates';
 
 import {
@@ -44,7 +45,7 @@ import {
   // Utility
   getCurrentDate,
 } from './model';
-import { getApiData, setApiData } from './apiCalls';
+import { getApiData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
@@ -75,14 +76,14 @@ function initializeStore() {
   };
 }
 
-let store;
+export let store;
 
 window.onload = () => {
   store = initializeStore();
-  initializeApp();
+  getAllApiData();
 };
 
-function initializeApp() {
+export function getAllApiData(user) {
   Promise.all([
     getApiData(store.getAPIKey('users'), 'users'),
     getApiData(store.getAPIKey('sleep'), 'sleepData'),
@@ -92,7 +93,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
-      store.setKey('user', getRandomUser(users));
+      store.setKey('user', user || getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -100,7 +101,7 @@ function initializeApp() {
     .then(processUserData);
 }
 
-function processUserData() {
+export function processUserData() {
   // User Data
   const user = store.getKey('user');
   const userData = store.getKey('userData');
@@ -157,8 +158,8 @@ function processUserData() {
   const userWeeklyHydrationData = userHydrationData.slice(-7);
 
   // Display User Data
-  displayUserData(store.getKey('user'));
-  displayUsersName(store.getKey('user'));
+  displayUserData(user);
+  displayUsersName(user);
 
   // Display Step Data
   displayUserStepsVsAvg(userSteps, avg);
@@ -228,9 +229,10 @@ function changeSave() {
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  form.checkValidity();
   form.reportValidity();
+  storeSleepData();
 
   toggleAddSleepModal();
   form.reset();
 });
+// sleepModalSaveButton.onclick = storeSleepData;
