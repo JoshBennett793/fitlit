@@ -46,8 +46,8 @@ export function displayUserData(user) {
 // Steps
 
 export function displayUserStepsVsAvg(userSteps, avg) {
-  userStepsEl.innerText = `You: ${userSteps}`;
-  avgStepsEl.innerText = `Avg: ${avg}`;
+  userStepsEl.innerText = `${userSteps} Steps`;
+  avgStepsEl.innerText = `${avg} Steps`;
 }
 
 export function displayTodaysStepData(stepData, goal) {
@@ -75,11 +75,11 @@ export function displayRunOnMap(latlngs) {
 // Activity
 
 export function displayDistanceTraveled(distance) {
-  distanceTraveledEl.innerText = `${distance} mi`;
+  distanceTraveledEl.innerText = `${distance}`;
 }
 
 export function displayTimeActive(time) {
-  timeActiveEl.innerText = `${time} mins`;
+  timeActiveEl.innerText = `${time}`;
 }
 
 // Sleep
@@ -118,12 +118,13 @@ export function displayWeeklySleepQuality(userWeeklySleepData) {
 
 export function toggleAddSleepModal() {
   sleepModal.classList.toggle('visible');
+  // document.querySelector('#map').classlist.toggle('hidden');
 }
 
 // Hydration
 
 export function displayCurrentDayWaterIntake(currentIntake) {
-  waterIntake.innerText = `Today : ${currentIntake} ounces`;
+  waterIntake.innerText = `${currentIntake}`;
 }
 
 export function displayWeeklyWaterIntake(userWeeklyHydrationData) {

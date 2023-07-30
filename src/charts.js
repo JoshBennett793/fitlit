@@ -6,7 +6,7 @@ export function WeeklyStepsVsGoal(weekData, goal) {
   return new Chart(document.getElementById('weekly-steps-bar-chart'), {
     type: 'bar',
     data: {
-      labels: dates,
+      labels: dates.map(date => date.slice(5)),
       datasets: [
         {
           label: 'Actual Steps',

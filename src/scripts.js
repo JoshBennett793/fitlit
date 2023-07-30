@@ -2,6 +2,7 @@ import './images/glass-of-water.png';
 import './images/pink-moon.png';
 import './images/distance.svg';
 import './images/time.svg';
+import './images/walk.png'
 import './css/styles.css';
 import 'leaflet/dist/leaflet.css';
 
