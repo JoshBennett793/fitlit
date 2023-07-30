@@ -42,9 +42,8 @@ import {
   calculateDistanceTraveled,
   // Utility
   getCurrentDate,
-  storeSleepData,
 } from './model';
-import { getApiData } from './apiCalls';
+import { getApiData, storeSleepData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
