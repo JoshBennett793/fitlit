@@ -118,6 +118,7 @@ export function displayWeeklySleepQuality(userWeeklySleepData) {
 
 export function toggleAddSleepModal() {
   sleepModal.classList.toggle('visible');
+  // document.querySelector('#map').classlist.toggle('hidden');
 }
 
 // Hydration
