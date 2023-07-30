@@ -1,14 +1,12 @@
 // Utility Functions
 
 function getRandomID(array) {
-  return Math.floor(Math.random() * array.length) + 1;
+  return Math.floor(Math.random() * 5) + 1;
 }
 
 export function getCurrentDate(userData) {
   return userData[userData.length - 1].date;
 }
-
-export function getNextDate(date) {}
 
 // User Data
 
@@ -84,6 +82,14 @@ export function compareStepsWithGoal(stepData, goal) {
   }
 
   return false;
+}
+
+export function formatRunData(runData) {
+  const latlngs = [...runData.querySelectorAll('rtept')];
+  return latlngs.reduce((acc, curr) => {
+    acc.push([curr.getAttribute('lat'), curr.getAttribute('lon')]);
+    return acc;
+  }, []);
 }
 
 // Activity Data
