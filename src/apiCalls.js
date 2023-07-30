@@ -8,6 +8,13 @@ export function getApiData(url, dataKey) {
     .then(data => data[dataKey]);
 }
 
+export function getXMLData(url) {
+  return fetch(url)
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
+    .then(data => data);
+}
+
 export function setApiData(url, userID, date, hoursSlept, sleepQuality) {
   return fetch(url, {
     method: 'POST',

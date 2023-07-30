@@ -3,6 +3,7 @@ import './images/pink-moon.png';
 import './images/distance.svg';
 import './images/time.svg';
 import './css/styles.css';
+import 'leaflet/dist/leaflet.css';
 
 import {
   // User
@@ -29,6 +30,7 @@ import {
   // Hydration
   displayCurrentDayWaterIntake,
   displayWeeklyWaterIntake,
+  displayRunOnMap,
 } from './domUpdates';
 
 import {
@@ -42,8 +44,9 @@ import {
   calculateDistanceTraveled,
   // Utility
   getCurrentDate,
+  formatRunData,
 } from './model';
-import { getApiData, storeSleepData } from './apiCalls';
+import { getApiData, getXMLData, storeSleepData } from './apiCalls';
 
 // Query Selectors
 const addSleepDataButton = document.querySelector('.add-btn');
@@ -146,6 +149,14 @@ export function processUserData() {
     'sleepQuality',
     userSleepData,
     getCurrentDate(userSleepData),
+  );
+
+  getXMLData(`http://localhost:3001/api/v1/users/${user.id}/latestrun`).then(
+    runData => {
+      store.setKey('latestRun', runData);
+      const formattedRunData = formatRunData(runData);
+      displayRunOnMap(formattedRunData);
+    },
   );
 
   // Hydration Data
