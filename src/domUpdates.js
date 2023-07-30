@@ -1,3 +1,4 @@
+import L from 'leaflet';
 import {
   WeeklyStepsVsGoal,
   stepProgressBar,
@@ -5,11 +6,7 @@ import {
   weeklySleepHoursChart,
   weeklyWaterIntakeChart,
 } from './charts';
-import {
-  getCurrentDate,
-  getDataByDate,
-  getAllTimeAverage,
-} from './model';
+import { getCurrentDate, getDataByDate, getAllTimeAverage } from './model';
 
 const usersName = document.querySelector('h2');
 const userStepsEl = document.querySelector('.user-steps');
@@ -60,6 +57,19 @@ export function displayTodaysStepData(stepData, goal) {
 
 export function displayWeeklyStepData(weekData, goal) {
   return WeeklyStepsVsGoal(weekData, goal);
+}
+
+export function displayRunOnMap(latlngs) {
+  const map = L.map('map');
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  const polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+
+  map.fitBounds(polyline.getBounds());
 }
 
 // Activity
@@ -119,6 +129,8 @@ export function displayCurrentDayWaterIntake(currentIntake) {
 export function displayWeeklyWaterIntake(userWeeklyHydrationData) {
   return weeklyWaterIntakeChart(userWeeklyHydrationData);
 }
+
+// Errors
 
 export function displayError(error) {
   errorMsg.innerText = error;
