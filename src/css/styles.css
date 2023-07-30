@@ -327,6 +327,8 @@ p {
   border-radius: 8%;
 }
 
+/* -------------Modal--------------*/
+
 .sleep-modal {
   visibility: hidden;
   position: fixed;
