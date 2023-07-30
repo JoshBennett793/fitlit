@@ -1,34 +1,56 @@
 import './images/glass-of-water.png';
-import './images/zzzz.png';
+import './images/pink-moon.png';
+import './images/distance.svg';
+import './images/time.svg';
 import './css/styles.css';
+
 import {
+  // User
   displayUsersName,
-  showWeeklySleepData,
-  showDailySleepData,
-  showDailySleepQuality,
-  showWeeklyWaterIntake,
-  showUserData,
-  showUserStepsVsAvg,
-  showCurrentDayWaterIntake,
-  displayWeeklyStepData,
-  sleepAverage,
+  displayUserData,
+
+  // Steps
+  displayUserStepsVsAvg,
   displayTodaysStepData,
-  weeklyQualitySleep,
+  displayWeeklyStepData,
+
+  // Activity
   displayDistanceTraveled,
   displayTimeActive,
+
+  // Sleep
+  sleepAverage,
+  displayDailySleepData,
+  displayDailySleepQuality,
+  displayWeeklySleepData,
+  displayWeeklySleepQuality,
+  toggleAddSleepModal,
+
+  // Hydration
+  displayCurrentDayWaterIntake,
+  displayWeeklyWaterIntake,
 } from './domUpdates';
+
 import {
+  // User
   getRandomUser,
   getUserData,
-  getTodays,
-  calculateDistanceTraveled,
-  getActivityDataByDate,
-  getCurrentDate,
+  getDataByDate,
   getAllTimeAverage,
   getWeekly,
-  getMinutesActive,
+  // Activity
+  calculateDistanceTraveled,
+  // Utility
+  getCurrentDate,
 } from './model';
-import { getApiData, setApiData } from './apiCalls';
+import { getApiData, storeSleepData } from './apiCalls';
+
+// Query Selectors
+const addSleepDataButton = document.querySelector('.add-btn');
+const exitModalButton = document.querySelector('.exit-modal');
+const saveFormButton = document.querySelector('.save-btn');
+const form = document.querySelector('form');
+const errorMsg = document.querySelector('.modal-error-message');
 
 function initializeStore() {
   const store = {
@@ -53,14 +75,14 @@ function initializeStore() {
   };
 }
 
-let store;
+export let store;
 
 window.onload = () => {
   store = initializeStore();
-  initializeApp();
+  getAllApiData();
 };
 
-function initializeApp() {
+export function getAllApiData(user) {
   Promise.all([
     getApiData(store.getAPIKey('users'), 'users'),
     getApiData(store.getAPIKey('sleep'), 'sleepData'),
@@ -70,6 +92,7 @@ function initializeApp() {
     .then(values => {
       const [users, sleepData, hydrationData, activityData] = values;
       store.setKey('userData', users);
+      store.setKey('user', user || getRandomUser(users));
       store.setKey('sleepData', sleepData);
       store.setKey('hydrationData', hydrationData);
       store.setKey('activityData', activityData);
@@ -77,51 +100,127 @@ function initializeApp() {
     .then(processUserData);
 }
 
-function processUserData() {
-  const userData = store.getKey('userData');
-  store.setKey('user', getRandomUser(userData));
+export function processUserData() {
+  // User Data
   const user = store.getKey('user');
-  const userSteps = user.dailyStepGoal;
+  const userData = store.getKey('userData');
   const avg = getAllTimeAverage('dailyStepGoal', userData);
-  const userHydrationData = getUserData(
-    'hydrationData',
-    store.getKey('hydrationData'),
-    user.id
-  );
-  const userSleepData = getUserData(
-    'sleepData',
-    store.getKey('sleepData'),
-    user.id
-  );
+
+  // Activity Data
   const userActivityData = getUserData(
     'activityData',
     store.getKey('activityData'),
-    user.id
+    user.id,
   );
-  const userWeeklyActivityData = userActivityData.slice(-7);
-  const mostRecentActivityData = userWeeklyActivityData.slice(-1)[0];
-  const dailyStepData = getTodays(
+  const userWeeklyActivityData = getWeekly(
     'numSteps',
     userActivityData,
-    getCurrentDate(userActivityData)
+    getCurrentDate(userActivityData),
   );
-  showCurrentDayWaterIntake(
-    getTodays('numOunces', userHydrationData, getCurrentDate(userHydrationData))
+  const mostRecentActivityData = getDataByDate(
+    'minutesActive',
+    userActivityData,
+    getCurrentDate(userActivityData),
   );
-  showUserData(store.getKey('user'));
-  showUserStepsVsAvg(userSteps, avg);
-  displayUsersName(store.getKey('user'));
-  showWeeklyWaterIntake(userHydrationData);
-  displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal);
-  displayTodaysStepData(dailyStepData, user.dailyStepGoal);
-  showWeeklySleepData(userSleepData);
+
+  // Step Data
+  const userSteps = user.dailyStepGoal;
+  const dailyStepData = getDataByDate(
+    'numSteps',
+    userActivityData,
+    getCurrentDate(userActivityData),
+  );
+
+  // Sleep Data
+  const userSleepData = getUserData(
+    'sleepData',
+    store.getKey('sleepData'),
+    user.id,
+  );
+  const userWeeklySleepData = getWeekly(
+    'hoursSlept',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
+  const weeklySleepQualityData = getWeekly(
+    'sleepQuality',
+    userSleepData,
+    getCurrentDate(userSleepData),
+  );
+
+  // Hydration Data
+  const userHydrationData = getUserData(
+    'hydrationData',
+    store.getKey('hydrationData'),
+    user.id,
+  );
+  const userWeeklyHydrationData = userHydrationData.slice(-7);
+
+  // Display User Data
+  displayUserData(user);
+  displayUsersName(user);
+
+  // Display Step Data
+  displayUserStepsVsAvg(userSteps, avg);
+  store.setKey(
+    'todaysStepDataChart',
+    displayTodaysStepData(dailyStepData, user.dailyStepGoal),
+  );
+  store.setKey(
+    'weeklyStepDataChart',
+    displayWeeklyStepData(userWeeklyActivityData, user.dailyStepGoal),
+  );
+
+  // Display Sleep Data
   sleepAverage(userSleepData);
-  showDailySleepData(userSleepData);
-  showDailySleepQuality(userSleepData);
-  weeklyQualitySleep(userSleepData);
-  setApiData('http://localhost:3001/api/v1/sleep')
+  displayDailySleepData(userSleepData);
+  store.setKey(
+    'weeklySleepDataChart',
+    displayWeeklySleepData(userWeeklySleepData),
+  );
+  displayDailySleepQuality(userSleepData);
+  store.setKey(
+    'weeklySleepQualityChart',
+    displayWeeklySleepQuality(weeklySleepQualityData),
+  );
+
+  // Display Hydration Data
+  displayCurrentDayWaterIntake(
+    getDataByDate(
+      'numOunces',
+      userHydrationData,
+      getCurrentDate(userHydrationData),
+    ),
+  );
+  store.setKey(
+    'weeklyHydrationDataChart',
+    displayWeeklyWaterIntake(userWeeklyHydrationData),
+  );
+
+  // Display Activity Data
   displayDistanceTraveled(
     calculateDistanceTraveled(user, undefined, userActivityData),
   );
-  displayTimeActive(getMinutesActive(mostRecentActivityData));
+  displayTimeActive(mostRecentActivityData);
 }
+
+// Event Listeners
+
+addSleepDataButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+});
+exitModalButton.addEventListener('click', () => {
+  toggleAddSleepModal();
+  form.reset();
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  form.reportValidity();
+  storeSleepData();
+
+  toggleAddSleepModal();
+  errorMsg.innerText = '';
+  form.reset();
+});

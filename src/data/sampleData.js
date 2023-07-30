@@ -83,7 +83,7 @@ export default {
       userID: 3,
       date: '2023/03/31',
       numOunces: 86,
-    }
+    },
   ],
   sleepData: [
     {
@@ -140,9 +140,11 @@ export default {
       hoursSlept: 7.5,
       sleepQuality: 3.7,
     },
-    { userID: 3, date: '2023/03/31', 
-    hoursSlept: 6.9, 
-    sleepQuality: 3.5 
+    { 
+      userID: 3, 
+      date: '2023/03/31', 
+      hoursSlept: 6.9, 
+      sleepQuality: 3.5 
     },
     {
       userID: 4,
@@ -308,4 +310,3 @@ export default {
     },
   ],
 };
-
