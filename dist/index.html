@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link
@@ -60,11 +60,15 @@
         <div class="board grid-col-span-2">
           <section class="widget neon">
             <div class="widget-circle">
-              <img class="widget-icon" src="./images/time.svg" alt="Minutes" aria-label="none"/>
+              <img
+                class="widget-icon"
+                src="./images/time.svg"
+                alt="Minutes"
+                aria-label="none"
+              />
             </div>
             <p class="active-value widget-data"></p>
-            <p>Minutes
-              Active Today</p>
+            <p>Minutes Active Today</p>
           </section>
           <section class="weekly-chart">
             <p>Steps this Week</p>
@@ -82,8 +86,7 @@
               />
             </div>
             <p class="water-intake widget-data"></p>
-            <p>Ounces 
-              Drank Today</p>
+            <p>Ounces Drank Today</p>
           </section>
           <section class="weekly-chart">
             <p>Ounces Drank this Week</p>
@@ -105,10 +108,10 @@
           </section>
           <div class="weekly-chart">
             <p>Your Latest Run</p>
-          <div class="map">
-            <div id="map"></div>
+            <div class="map">
+              <div id="map"></div>
+            </div>
           </div>
-        </div>
         </div>
         <div class="board grid-col-span-4">
           <section class="widget neon">
@@ -134,13 +137,13 @@
             <canvas id="weekly-sleep-quality-bar-chart"></canvas>
           </section>
           <section class="board-info">
+            <p>All Time Average Hours Slept</p>
             <p class="average-hours-sleep-box data-box"></p>
-            <p>Alltime Average
-               Hours Slept</p>
+            <p>All Time Average 
+              Sleep Quality</p>
             <p class="average-sleep-quality-box data-box"></p>
-            <p>Alltime Average
-               Sleep Quality</p>
           </section>
+          <p class="add-btn-info">Add sleep data</p>
           <button class="add-btn">+</button>
         </div>
       </div>
@@ -163,7 +166,7 @@
               <input type="time" name="end-time" id="end-time" required />
             </li>
             <li>
-              <label for="sleep-quality" class="modal-label">Quality</label>
+              <label for="sleep-quality" class="modal-label">Quality <span>1 (worst) - 5 (best)</span></label>
               <input
                 type="number"
                 name="sleep-quality"
