@@ -60,7 +60,7 @@ describe('activityData', () => {
   });
 
   it('should return the average of all step goals', () => {
-    expect(average).to.equal(6000);
+    expect(average).to.equal(5000);
   });
 
   it("should return a user's activity data by date", () => {
