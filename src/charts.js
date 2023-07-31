@@ -1,8 +1,19 @@
 import Chart from 'chart.js/auto';
 import { compareStepsWithGoal } from './model';
 
+const stepsDescription = document.querySelector('.steps-description');
+
 export function WeeklyStepsVsGoal(weekData, goal) {
   const dates = Object.keys(weekData);
+  const values = dates.map(date => weekData[date]);
+
+  const displayInfo = dates.reduce((acc, date, index) => {
+    acc += `${values[index]}oz on ${date}`;
+    return acc;
+  }, '');
+
+  stepsDescription.innerText = displayInfo;
+
   return new Chart(document.getElementById('weekly-steps-bar-chart'), {
     type: 'bar',
     data: {
