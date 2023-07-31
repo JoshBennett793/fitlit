@@ -76,7 +76,7 @@ p {
 /* -------------Widget--------------*/
 .widget-grid {
   margin: 3rem;
-  width: 65vw;
+  width: 100vw;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 3rem;
@@ -96,7 +96,7 @@ p {
 }
 
 .widget {
-  min-width: 10rem;
+  width: 14rem;
   background-color: #000000;
   border-radius: 1.5rem;
   display: flex;
@@ -157,7 +157,7 @@ p {
 }
 
 .add-btn-info {
-  right: -15rem;
+  right: -12rem;
   width: 15rem;
   display: flex;
   align-items: center;
@@ -167,7 +167,15 @@ p {
   transition: .5s;
 }
 
-.grid-col-span-4:hover .add-btn-info {
+.add-btn-container {
+  height: 4rem;
+  width: 4rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.add-btn-container:hover .add-btn-info {
   transition: .5s;
   right: 0;
 }
@@ -322,8 +330,8 @@ input:valid {
 /* -------------User--------------*/
 
 .user-box {
-  height: 78%;
-  margin-top: 0;
+  height: 90%;
+  /* margin-top: 0; */
   background-color: #310c2d;
   border-radius: 1.5rem;
   display: flex;
@@ -364,6 +372,74 @@ input:valid {
 .positive {
   text-align: center;
   font-size: 6rem;
+}
+
+.name {
+  font-size: x-large;
+  text-align: center;
+}
+
+.address,
+.email {
+  font-size: large;
+  text-align: center;
+}
+
+.quote-box {
+  margin-top: 2%;
+  width: 16rem;
+  margin: 60px auto;
+  padding: 5px;
+  border: solid #fab5d7 0.3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
+    inset 0 0 0px 0px #c11867;
+}
+
+.think{
+  font-family: 'Sacramento', cursive;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.positive {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.name {
+  font-size: x-large;
+  text-align: center;
+}
+
+.address,
+.email {
+  font-size: large;
+  text-align: center;
+}
+
+.quote-box {
+  margin-top: 2%;
+  width: 16rem;
+  margin: 60px auto;
+  padding: 5px;
+  border: solid #fab5d7 0.3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
+    inset 0 0 0px 0px #c11867;
+}
+
+.think,
+.feel,
+.live {
+  font-family: 'Sacramento', cursive;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.positive {
+  text-align: center;
+  font-size: 2rem;
 }
 
 /* -------------Map--------------*/
