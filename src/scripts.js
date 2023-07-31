@@ -19,6 +19,7 @@ import {
   // Activity
   displayDistanceTraveled,
   displayTimeActive,
+  displayMilesRun,
 
   // Sleep
   sleepAverage,
@@ -46,6 +47,7 @@ import {
   // Utility
   getCurrentDate,
   formatRunData,
+  getMilesRun,
 } from './model';
 import { getApiData, getXMLData, storeSleepData } from './apiCalls';
 
@@ -157,6 +159,7 @@ export function processUserData() {
       store.setKey('latestRun', runData);
       const formattedRunData = formatRunData(runData);
       displayRunOnMap(formattedRunData);
+      displayMilesRun(getMilesRun(runData))
     },
   );
 

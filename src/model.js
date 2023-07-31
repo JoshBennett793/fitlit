@@ -91,6 +91,10 @@ export function formatRunData(runData) {
   }, []);
 }
 
+export function getMilesRun(runData) {
+  return runData.querySelector('name');
+}
+
 // Activity Data
 
 export function getMinutesActive(activityData) {
