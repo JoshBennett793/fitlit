@@ -63,7 +63,6 @@ export function getWeekly(key, userData, date) {
     weeklyData = userData.slice(indexOfDate - 6, indexOfDate + 1);
   }
 
-  weeklyData.reverse();
   return weeklyData.reduce((week, day) => {
     week[day.date] = day[key];
     return week;
