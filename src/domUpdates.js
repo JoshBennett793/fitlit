@@ -23,6 +23,7 @@ const dailySleepBox = document.querySelector('.daily-sleep-hours-box');
 const dailyQualitySleepBox = document.querySelector('.daily-sleep-quality-box');
 const sleepModal = document.querySelector('.sleep-modal');
 const errorMsg = document.querySelector('.modal-error-message');
+const milesRunBox = document.querySelector('.distance-run');
 
 // User
 
@@ -82,6 +83,10 @@ export function displayTimeActive(time) {
   timeActiveEl.innerText = `${time}`;
 }
 
+export function displayMilesRun(milesRun) {
+  milesRunBox.innerText = milesRun.textContent.slice(0, 4);
+}
+
 // Sleep
 
 export function sleepAverage(sleep) {
@@ -118,7 +123,6 @@ export function displayWeeklySleepQuality(userWeeklySleepData) {
 
 export function toggleAddSleepModal() {
   sleepModal.classList.toggle('visible');
-  // document.querySelector('#map').classlist.toggle('hidden');
 }
 
 // Hydration
