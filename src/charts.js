@@ -3,8 +3,8 @@ import { compareStepsWithGoal } from './model';
 
 const stepsDescription = document.querySelector('.steps-description');
 const waterDescription = document.querySelector('.water-description');
-const weeklySleep = document.querySelector('.weekly-sleep-chart');
-const sleepQuality = document.querySelector('.sleep-quality-chart');
+const weeklySleepDescription = document.querySelector('.weekly-sleep-chart');
+const sleepQualityDescription = document.querySelector('.sleep-quality-chart');
 
 
 export function WeeklyStepsVsGoal(weekData, goal) {
@@ -47,7 +47,7 @@ export function weeklySleepQualityChart(weekData) {
     return acc;
   }, '');
 
-  sleepQuality.innerText = displayInfo;
+  sleepQualityDescription.innerText = displayInfo;
 
   return new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
     type: 'bar',
@@ -73,7 +73,7 @@ export function weeklySleepHoursChart(weekData) {
     return acc;
   }, '');
 
-  weeklySleep.innerText = displayInfo;
+  weeklySleepDescription.innerText = displayInfo;
 
   return new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
     type: 'bar',
