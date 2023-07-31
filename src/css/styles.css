@@ -126,6 +126,7 @@ p {
 
 .grid-col-span-4 {
   grid-column: span 4;
+  overflow: hidden;
 }
 
 .widget {
@@ -170,17 +171,41 @@ p {
 }
 
 .add-btn {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: #c11867;
+  width: 4rem;
+  /* center plus in button */
+  padding-bottom: 3px;
+  border-radius: 50% 0 0 50%;
   text-align: center;
   font-size: 2rem;
   cursor: pointer;
 }
+
+.add-btn-info,
+.add-btn {
+  color: #e9c4e0;
+  height: 4rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #c11867;
+}
+
+.add-btn-info {
+  right: -15rem;
+  width: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+  border-radius: 25px 0 0 25px;
+  transition: .5s;
+}
+
+.grid-col-span-4:hover .add-btn-info {
+  transition: .5s;
+  right: 0;
+}
+
 
 .widget-data {
   font-size: 3.5rem;
@@ -204,19 +229,19 @@ p {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-
+  
   height: 50vh;
   width: 50rem;
   padding: 2rem;
-
+  
   color: #e9c4e0;
   background-color: #431a3f;
   border: solid #fab5d7 0.3rem;
   border-radius: 0.8rem;
   box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
-    inset 0 0 0px 0px #c11867;
+  inset 0 0 0px 0px #c11867;
   z-index: 1;
-
+  
   display: flex;
   justify-content: center;
 }
@@ -237,14 +262,14 @@ p {
   border-radius: 50%;
   height: 3.5rem;
   width: 3.5rem;
-
+  
   font-size: 2rem;
   color: #e9c4e0;
   background-color: #310c2d;
-
+  
   margin-right: 1rem;
   margin-bottom: 5rem;
-
+  
   cursor: pointer;
 }
 
@@ -283,10 +308,14 @@ p {
   list-style: none;
   background-color: #310c2d;
   border-radius: 0.5rem;
-
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+label[for="sleep-quality"] span {
+  font-size: 1.3rem;
 }
 
 input {
