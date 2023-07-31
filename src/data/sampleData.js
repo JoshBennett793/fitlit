@@ -27,7 +27,26 @@ export default {
       dailyStepGoal: 3000,
       friends: [31, 16, 15, 7],
     },
+    {
+      id: 4,
+      name: 'Bob White',
+      address: '4364 Wilbur Way, Burnswood CO 34762',
+      email: 'Bob.white@gmail.com',
+      strideLength: 3.2,
+      dailyStepGoal: 4000,
+      friends: [12, 4, 17, 9],
+    },
+    {
+      id: 5,
+      name: 'Sherry Williams',
+      address: '8574 Wallsburry St, Springfield IN 74953',
+      email: 'Wilford.Barton@gmail.com',
+      strideLength: 2.7,
+      dailyStepGoal: 3000,
+      friends: [31, 16, 15, 7],
+    },
   ],
+
   hydration: [
     {
       userID: 1,
@@ -85,6 +104,7 @@ export default {
       numOunces: 86,
     },
   ],
+  
   sleepData: [
     {
       userID: 1,
@@ -195,6 +215,7 @@ export default {
       sleepQuality: 1.2,
     },
   ],
+  
   activity: [
     {
       userID: 1,

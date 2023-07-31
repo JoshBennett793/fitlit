@@ -98,6 +98,7 @@ export function stepProgressBar(stepData, goal) {
     options: {
       plugins: {
         legend: {
+          align: 'start',
           labels: {
             color: '#e9c4e0',
           },
