@@ -3,8 +3,8 @@ import { compareStepsWithGoal } from './model';
 
 const stepsDescription = document.querySelector('.steps-description');
 const waterDescription = document.querySelector('.water-description');
-const weeklySleepDescription = document.querySelector('.weekly-sleep-chart');
-const sleepQualityDescription = document.querySelector('.sleep-quality-chart');
+const weeklySleepDescription = document.querySelector('.weekly-sleep-description');
+const sleepQualityDescription = document.querySelector('.sleep-quality-description');
 
 
 export function WeeklyStepsVsGoal(weekData, goal) {
