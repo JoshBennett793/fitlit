@@ -78,7 +78,8 @@ p {
   text-align: center;
 }
 
-.address, .email {
+.address,
+.email {
   font-size: large;
   text-align: center;
 }
@@ -93,7 +94,9 @@ p {
     inset 0 0 0px 0px #c11867;
 }
 
-.think, .feel, .live {
+.think,
+.feel,
+.live {
   font-family: 'Sacramento', cursive;
   text-align: center;
   font-size: 5rem;
@@ -102,7 +105,6 @@ p {
 .positive {
   text-align: center;
   font-size: 2rem;
-  
 }
 
 /* -------------Widget--------------*/
@@ -341,9 +343,8 @@ input:valid {
 /* -------------Map--------------*/
 
 .map {
- height: 15rem;
- width: 29.5rem;
- 
+  height: 15rem;
+  width: 29.5rem;
 }
 
 #map {
@@ -363,8 +364,9 @@ input:valid {
 
 @keyframes pulsate {
   100% {
-    text-shadow: 0 0 4px rgb(249, 117, 197), 0 0 11px rgb(249, 117, 197), 0 0 19px rgb(249, 117, 197), 0 0 40px #f09,
-      0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+    text-shadow: 0 0 4px rgb(249, 117, 197), 0 0 11px rgb(249, 117, 197),
+      0 0 19px rgb(249, 117, 197), 0 0 40px #f09, 0 0 80px #f09, 0 0 90px #f09,
+      0 0 100px #f09, 0 0 150px #f09;
   }
   0% {
     text-shadow: 0 0 4px #f09, 0 0 10px #f09, 0 0 18px #f09, 0 0 38px #f09,
