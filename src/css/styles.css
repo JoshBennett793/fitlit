@@ -34,13 +34,13 @@ main {
 }
 
 .breathe {
-  font-family: 'Neonderthaw', cursive;
+  font-family: 'Sacramento', cursive;
   font-size: 9rem;
-  color: #fab5d7;
-  text-shadow: 0 0 1rem #fff, 0 0 1rem #fff, 0 0 2rem #fff,
-    0 0 4rem rgb(242, 171, 214), 0 0 8rem #f09, 0 0 9rem rgb(240, 61, 168),
+  color: #e9c4e0;
+  text-shadow: 0 0 1rem #000, 0 0 1rem #000, 0 0 2rem #000,
+    0 0 4rem rgb(225, 122, 184), 0 0 8rem #f09, 0 0 9rem rgb(240, 61, 168),
     0 0 10rem #f09, 0 0 15rem #f09;
-  animation: pulsate 0.5s ease-in-out infinite alternate;
+  animation: pulsate 0.7s ease-in-out infinite alternate;
 }
 
 h1,
@@ -71,6 +71,38 @@ p {
   font-family: 'Raleway', sans-serif;
   font-size: 1.5rem;
   white-space: pre-line;
+}
+
+.name {
+  font-size: x-large;
+  text-align: center;
+}
+
+.address, .email {
+  font-size: large;
+  text-align: center;
+}
+
+.quote-box {
+  margin-top: 2%;
+  width: 16rem;
+  margin-left: 30%;
+  border: solid #fab5d7 0.3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
+    inset 0 0 0px 0px #c11867;
+}
+
+.think, .feel, .live {
+  font-family: 'Sacramento', cursive;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.positive {
+  text-align: center;
+  font-size: 2rem;
+  
 }
 
 /* -------------Widget--------------*/
@@ -331,11 +363,11 @@ input:valid {
 
 @keyframes pulsate {
   100% {
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
+    text-shadow: 0 0 4px rgb(249, 117, 197), 0 0 11px rgb(249, 117, 197), 0 0 19px rgb(249, 117, 197), 0 0 40px #f09,
       0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
   }
   0% {
-    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09,
+    text-shadow: 0 0 4px #f09, 0 0 10px #f09, 0 0 18px #f09, 0 0 38px #f09,
       0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
   }
 }
