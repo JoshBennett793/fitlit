@@ -73,40 +73,6 @@ p {
   white-space: pre-line;
 }
 
-.name {
-  font-size: x-large;
-  text-align: center;
-}
-
-.address,
-.email {
-  font-size: large;
-  text-align: center;
-}
-
-.quote-box {
-  margin-top: 2%;
-  width: 16rem;
-  margin-left: 30%;
-  border: solid #fab5d7 0.3rem;
-  border-radius: 0.8rem;
-  box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
-    inset 0 0 0px 0px #c11867;
-}
-
-.think,
-.feel,
-.live {
-  font-family: 'Sacramento', cursive;
-  text-align: center;
-  font-size: 5rem;
-}
-
-.positive {
-  text-align: center;
-  font-size: 2rem;
-}
-
 /* -------------Widget--------------*/
 .widget-grid {
   margin: 3rem;
@@ -364,8 +330,8 @@ input:valid {
 /* -------------User--------------*/
 
 .user-box {
-  height: 76%;
-  margin-top: 0;
+  height: 90%;
+  /* margin-top: 0; */
   background-color: #310c2d;
   border-radius: 1.5rem;
   display: flex;
@@ -375,6 +341,41 @@ input:valid {
 
 .info-box {
   padding: 3rem;
+}
+
+.name {
+  font-size: x-large;
+  text-align: center;
+}
+
+.address,
+.email {
+  font-size: large;
+  text-align: center;
+}
+
+.quote-box {
+  margin-top: 2%;
+  width: 16rem;
+  margin: 60px auto;
+  padding: 5px;
+  border: solid #fab5d7 0.3rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem 0.2rem rgba(193, 24, 103, 0.85),
+    inset 0 0 0px 0px #c11867;
+}
+
+.think,
+.feel,
+.live {
+  font-family: 'Sacramento', cursive;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.positive {
+  text-align: center;
+  font-size: 2rem;
 }
 
 /* -------------Map--------------*/
