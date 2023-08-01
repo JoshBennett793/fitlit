@@ -3,8 +3,8 @@ import { compareStepsWithGoal } from './model';
 
 const stepsDescription = document.querySelector('.steps-description');
 const waterDescription = document.querySelector('.water-description');
-const weeklySleepDescription = document.querySelector('.weekly-sleep-description');
-const sleepQualityDescription = document.querySelector('.sleep-quality-description');
+const weeklySleep = document.querySelector('.weekly-sleep');
+const sleepQuality = document.querySelector('.sleep-quality');
 
 
 export function WeeklyStepsVsGoal(weekData, goal) {
@@ -47,7 +47,7 @@ export function weeklySleepQualityChart(weekData) {
     return acc;
   }, '');
 
-  sleepQualityDescription.innerText = displayInfo;
+  sleepQuality.innerText = displayInfo;
 
   return new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
     type: 'bar',
@@ -69,11 +69,11 @@ export function weeklySleepHoursChart(weekData) {
   const values = dates.map(date => weekData[date]);
 
   const displayInfo = dates.reduce((acc, date, index) => {
-    acc += ` ${values[index]} hours slept on ${date} `;
+    acc += `${values[index]} hours slept on ${date}`;
     return acc;
   }, '');
 
-  weeklySleepDescription.innerText = displayInfo;
+  weeklySleep.innerText = displayInfo;
 
   return new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
     type: 'bar',
@@ -98,7 +98,7 @@ export function weeklyWaterIntakeChart(weekData) {
 
 
   const displayInfo = dates.reduce((acc, date, index) => {
-    acc += ` ${values[index]} oz on ${date} `;
+    acc += `${values[index]}oz on ${date}`;
     return acc;
   }, '');
 
