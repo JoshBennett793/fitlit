@@ -1,8 +1,23 @@
 import Chart from 'chart.js/auto';
 import { compareStepsWithGoal } from './model';
 
+const stepsDescription = document.querySelector('.steps-description');
+const waterDescription = document.querySelector('.water-description');
+const weeklySleep = document.querySelector('.weekly-sleep');
+const sleepQuality = document.querySelector('.sleep-quality');
+
+
 export function WeeklyStepsVsGoal(weekData, goal) {
   const dates = Object.keys(weekData);
+  const values = dates.map(date => weekData[date]);
+
+  const displayInfo = dates.reduce((acc, date, index) => {
+    acc += ` ${values[index]} steps on ${date} `;
+    return acc;
+  }, '');
+
+  stepsDescription.innerText = displayInfo;
+
   return new Chart(document.getElementById('weekly-steps-bar-chart'), {
     type: 'bar',
     data: {
@@ -42,6 +57,15 @@ export function WeeklyStepsVsGoal(weekData, goal) {
 
 export function weeklySleepQualityChart(weekData) {
   const dates = Object.keys(weekData);
+  const values = dates.map(date => weekData[date]);
+
+  const displayInfo = dates.reduce((acc, date, index) => {
+    acc += ` ${values[index]} sleep quality on ${date} `;
+    return acc;
+  }, '');
+
+  sleepQuality.innerText = displayInfo;
+
   return new Chart(document.getElementById('weekly-sleep-quality-bar-chart'), {
     type: 'bar',
     data: {
@@ -76,6 +100,15 @@ export function weeklySleepQualityChart(weekData) {
 
 export function weeklySleepHoursChart(weekData) {
   const dates = Object.keys(weekData);
+  const values = dates.map(date => weekData[date]);
+
+  const displayInfo = dates.reduce((acc, date, index) => {
+    acc += `${values[index]} hours slept on ${date}`;
+    return acc;
+  }, '');
+
+  weeklySleep.innerText = displayInfo;
+
   return new Chart(document.getElementById('weekly-sleep-hours-bar-chart'), {
     type: 'bar',
     data: {
@@ -110,6 +143,18 @@ export function weeklySleepHoursChart(weekData) {
 
 export function weeklyWaterIntakeChart(weekData) {
   const dates = weekData.map(row => row.date.slice(5)).slice(-7);
+
+  const keys = Object.keys(weekData);
+  const values = keys.map(date => weekData[date].numOunces);
+
+
+  const displayInfo = dates.reduce((acc, date, index) => {
+    acc += `${values[index]}oz on ${date}`;
+    return acc;
+  }, '');
+
+  waterDescription.innerText = displayInfo;
+
   return new Chart(document.getElementById('weekly-water-intake-bar-chart'), {
     type: 'bar',
     data: {

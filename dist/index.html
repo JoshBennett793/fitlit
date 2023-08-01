@@ -43,7 +43,7 @@
                 class="widget-icon"
                 src="./images/distance.svg"
                 alt="Miles"
-                aria-label="none"
+                aria-hidden="true"
               />
             </div>
             <p class="distance-value widget-data"></p>
@@ -51,7 +51,7 @@
               Today</p>
           </section>
           <div class="steps-circle">
-            <canvas id="steps-progress-bar" width="170"></canvas>
+            <canvas id="steps-progress-bar" width="170"><p class="visuallyhidden"></p></canvas>
           </div>
           <div class="board-info">
             <h4>Today you've taken:</h4>
@@ -65,19 +65,14 @@
         <div class="board grid-col-span-2">
           <section class="widget neon">
             <div class="widget-circle">
-              <img
-                class="widget-icon"
-                src="./images/time.svg"
-                alt="Minutes"
-                aria-label="none"
-              />
+              <img class="widget-icon" src="./images/time.svg" alt="Minutes" aria-hidden="true"/>
             </div>
             <p class="active-value widget-data"></p>
             <p>Minutes Active Today</p>
           </section>
           <section class="weekly-chart">
             <p>Steps this Week</p>
-            <canvas id="weekly-steps-bar-chart"></canvas>
+            <canvas id="weekly-steps-bar-chart"><p class="steps-description visuallyhidden"></p></canvas>
           </section>
         </div>
         <div class="board grid-col-span-2">
@@ -87,7 +82,7 @@
                 class="widget-icon"
                 src="./images/glass-of-water.png"
                 alt="Water"
-                aria-label="none"
+                aria-hidden="true"
               />
             </div>
             <p class="water-intake widget-data"></p>
@@ -95,7 +90,7 @@
           </section>
           <section class="weekly-chart">
             <p>Ounces Drank this Week</p>
-            <canvas id="weekly-water-intake-bar-chart"></canvas>
+            <canvas id="weekly-water-intake-bar-chart"><p class="water-description visuallyhidden"></p></canvas>
           </section>
         </div>
         <div class="board grid-col-span-2">
@@ -105,7 +100,7 @@
                 class="widget-icon icon-top"
                 src="./images/walk.png"
                 alt="Walk"
-                aria-label="none"
+                aria-hidden="true"
               />
             </div>
             <p class="distance-run widget-data"></p>
@@ -125,7 +120,7 @@
                 class="widget-icon icon-top"
                 src="./images/pink-moon.png"
                 alt="Sleep"
-                aria-label="none"
+                aria-hidden="true"
               />
             </div>
             <p class="daily-sleep-hours-box widget-data"></p>
@@ -135,11 +130,11 @@
           </section>
           <section class="weekly-chart">
             <p>Hours Slept This Week</p>
-            <canvas id="weekly-sleep-hours-bar-chart"></canvas>
+            <canvas id="weekly-sleep-hours-bar-chart"><p class="weekly-sleep visuallyhidden"></p></canvas>
           </section>
           <section class="weekly-chart">
-            <p>Sleep Quality This Week</p>
-            <canvas id="weekly-sleep-quality-bar-chart"></canvas>
+            <p>Hours Quality Slept This Week</p>
+            <canvas id="weekly-sleep-quality-bar-chart"><p class="sleep-quality visuallyhidden"></p></canvas>
           </section>
           <section class="board-info">
             <p>All Time Average Hours Slept</p>
