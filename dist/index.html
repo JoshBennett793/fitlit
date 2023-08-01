@@ -2,9 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap"
-      rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Fasthand&display=swap"
@@ -14,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Sacramento&display=swap" rel="stylesheet">
     <title>Fitlit</title>
   </head>
   <body>
@@ -28,6 +27,11 @@
             <p class="address"></p>
             <p class="email"></p>
           </article>
+            <div class="quote-box neon"> 
+              <p class="think">think, feel, live</p>
+              <p class="positive">POSITIVE</p>
+            </div>  
+          
         </section>
       </aside>
       <!-- grid -->
@@ -43,7 +47,8 @@
               />
             </div>
             <p class="distance-value widget-data"></p>
-            <p>Miles Today</p>
+            <p>Miles Walked
+              Today</p>
           </section>
           <div class="steps-circle">
             <canvas id="steps-progress-bar" width="170"><p class="visuallyhidden"></p></canvas>
@@ -63,8 +68,7 @@
               <img class="widget-icon" src="./images/time.svg" alt="Minutes" aria-hidden="true"/>
             </div>
             <p class="active-value widget-data"></p>
-            <p>Minutes
-              Active Today</p>
+            <p>Minutes Active Today</p>
           </section>
           <section class="weekly-chart">
             <p>Steps this Week</p>
@@ -82,8 +86,7 @@
               />
             </div>
             <p class="water-intake widget-data"></p>
-            <p>Ounces 
-              Drank Today</p>
+            <p>Ounces Drank Today</p>
           </section>
           <section class="weekly-chart">
             <p>Ounces Drank this Week</p>
@@ -101,14 +104,14 @@
               />
             </div>
             <p class="distance-run widget-data"></p>
-            <p>Distance Run</p>
+            <p>Miles Run</p>
           </section>
           <div class="weekly-chart">
             <p>Your Latest Run</p>
-          <div class="map">
-            <div id="map"></div>
+            <div class="map">
+              <div id="map"></div>
+            </div>
           </div>
-        </div>
         </div>
         <div class="board grid-col-span-4">
           <section class="widget neon">
@@ -134,14 +137,16 @@
             <canvas id="weekly-sleep-quality-bar-chart"><p class="sleep-quality visuallyhidden"></p></canvas>
           </section>
           <section class="board-info">
+            <p>All Time Average Hours Slept</p>
             <p class="average-hours-sleep-box data-box"></p>
-            <p>Alltime Average
-               Hours Slept</p>
+            <p>All Time Average 
+              Sleep Quality</p>
             <p class="average-sleep-quality-box data-box"></p>
-            <p>Alltime Average
-               Sleep Quality</p>
           </section>
-          <button class="add-btn">+</button>
+          <div class="add-btn-container">
+            <p class="add-btn-info">Add sleep data</p>
+            <button class="add-btn">+</button>
+          </div>
         </div>
       </div>
     </main>
@@ -163,7 +168,7 @@
               <input type="time" name="end-time" id="end-time" required />
             </li>
             <li>
-              <label for="sleep-quality" class="modal-label">Quality</label>
+              <label for="sleep-quality" class="modal-label">Quality <span>1 (worst) - 5 (best)</span></label>
               <input
                 type="number"
                 name="sleep-quality"

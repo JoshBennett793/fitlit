@@ -63,7 +63,6 @@ export function getWeekly(key, userData, date) {
     weeklyData = userData.slice(indexOfDate - 6, indexOfDate + 1);
   }
 
-  weeklyData.reverse();
   return weeklyData.reduce((week, day) => {
     week[day.date] = day[key];
     return week;
@@ -90,6 +89,10 @@ export function formatRunData(runData) {
     acc.push([curr.getAttribute('lat'), curr.getAttribute('lon')]);
     return acc;
   }, []);
+}
+
+export function getMilesRun(runData) {
+  return runData.querySelector('name');
 }
 
 // Activity Data

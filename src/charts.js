@@ -35,6 +35,23 @@ export function WeeklyStepsVsGoal(weekData, goal) {
         },
       ],
     },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+           color: '#fab5d7'
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: { color: '#fab5d7' }
+        },
+        x: {
+          ticks: { color: '#fab5d7'}
+        }
+      }
+    },
   });
 }
 
@@ -61,6 +78,23 @@ export function weeklySleepQualityChart(weekData) {
         },
       ],
     },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+           color: '#fab5d7'
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: { color: '#fab5d7' }
+        },
+        x: {
+          ticks: { color: '#fab5d7'}
+        }
+      }
+    },
   });
 }
 
@@ -86,6 +120,23 @@ export function weeklySleepHoursChart(weekData) {
           backgroundColor: ['rgb(255,0,152)'],
         },
       ],
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+           color: '#fab5d7'
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: { color: '#fab5d7' }
+        },
+        x: {
+          ticks: { color: '#fab5d7'}
+        }
+      }
     },
   });
 }
@@ -116,6 +167,23 @@ export function weeklyWaterIntakeChart(weekData) {
         },
       ],
     },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+           color: '#fab5d7'
+          },
+        },
+      },
+      scales: {
+        y: {
+          ticks: { color: '#fab5d7' }
+        },
+        x: {
+          ticks: { color: '#fab5d7'}
+        }
+      }
+    },
   });
 }
 
@@ -143,8 +211,9 @@ export function stepProgressBar(stepData, goal) {
     options: {
       plugins: {
         legend: {
+          align: 'start',
           labels: {
-            color: '#e9c4e0',
+           color: '#fab5d7'
           },
         },
       },

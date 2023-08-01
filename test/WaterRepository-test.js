@@ -67,13 +67,13 @@ describe('hydrationData', () => {
     const water = getWeekly('numOunces', userData, '2023/03/30');
     const waterDates = Object.keys(water);
     expect(waterDates).to.deep.equal([
-      '2023/03/30',
-      '2023/03/29',
-      '2023/03/28',
-      '2023/03/27',
-      '2023/03/26',
-      '2023/03/24',
       '2023/03/23',
+      '2023/03/24',
+      '2023/03/26',
+      '2023/03/27',
+      '2023/03/28',
+      '2023/03/29',
+      '2023/03/30',
     ]);
   });
 
